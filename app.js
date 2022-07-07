@@ -23,6 +23,14 @@ app.get('/',(req,res) => {
     res.render('index')
 })
 
+app.get('/record',(req,res) => {
+    res.render('record')
+})
+
+app.get('/rank',(req,res) => {
+    res.render('rank')
+})
+
 app.listen(3000,() => {
     console.log('App is running on http://localhost:3000')
 })
