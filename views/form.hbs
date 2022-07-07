@@ -1,0 +1,40 @@
+<div class="container-fluid mt-5">
+    <div class="mx-auto" style="width:700px;height:400px;border:3px solid tomato;">
+        <form class="p-3">
+            <h4 class="text-center my-3">輸入單場比賽數據</h4>
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="PTS" class="form-label">得分</label>
+                    <input type="number" class="form-control" id="PTS" placeholder="points" name="PTS" min="0">
+                </div>
+                <div class="col mb-3">
+                    <label for="FGA" class="form-label">投籃出手次數 <small>(三分出手次數 + 二分出手次數)</small> </label>
+                    <input type="number" class="form-control" id="FGA" name="FGA" min="0" placeholder="投籃出手次數">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="FTA" class="form-label">罰球出手次數</label>
+                    <input type="number" class="form-control" id="FTA" placeholder="罰球出手次數" name="FTA" min="0">
+                </div>
+                <div class="col mb-3">
+                    <label for="FGM" class="form-label">投籃命中<small>(三分命中 + 二分命中)</small></label>
+                    <input type="number" class="form-control" id="FGM" placeholder="投籃命中" name="FGM" min="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="3PM" class="form-label">三分命中</label>
+                    <input type="number" class="form-control" id="3PM" placeholder="三分命中" name="3PM" min="0">
+                </div>
+                <div class="col mb-3">
+                    <label for="TOV" class="form-label">失誤次數</label>
+                    <input type="number" class="form-control" id="TOV" placeholder="失誤次數" name="TOV" min="0">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-primary ">send</a>
+            </div>   
+        </form>
+    </div>
+</div>

@@ -31,6 +31,10 @@ app.get('/rank',(req,res) => {
     res.render('rank')
 })
 
+app.get('/form',(req,res) => {
+    res.render('form')
+})
+
 app.listen(3000,() => {
     console.log('App is running on http://localhost:3000')
 })
