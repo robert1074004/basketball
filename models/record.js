@@ -1,9 +1,16 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const recordSchema = new Schema({
-    point: {
-        type : Number,
-        required:true
-    }
-})
-module.exports = mongoose.model('Record',recordSchema)
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Record = sequelize.define('Record', {
+    PTS: DataTypes.INTEGER,
+    FGA: DataTypes.INTEGER,
+    FTA: DataTypes.INTEGER,
+    FGM: DataTypes.INTEGER,
+    THREE_PM: DataTypes.INTEGER,
+    TOV: DataTypes.INTEGER,
+    date: DataTypes.DATE
+  }, {});
+  Record.associate = function(models) {
+    // associations can be defined here
+  };
+  return Record;
+};
