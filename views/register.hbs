@@ -1,6 +1,6 @@
 <div class="container-fluid mt-5">
     <div class="mx-auto" style="width:700px; outline: tomato solid 3px;">
-        <form class="p-3 pb-4">
+        <form action="/users/register" method="POST" class="p-3 pb-4">
             {{!-- {{> message}} --}}
             <h1 class="text-center">Register</h1>
             <div class="row">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col mb-3">
                     <label for="category" class="form-label">類別</label>
-                    <select class="form-select" aria-label="Default select example" name="position">
+                    <select class="form-select" aria-label="Default select example" name="category">
                         <option value="業餘" selected>業餘</option>
                         <option value="大學">大學</option>
                         <option value="高中">高中</option>
