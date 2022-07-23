@@ -3,4 +3,4 @@ const basketballController = {
       return res.render('index')
     }
 }
-  module.exports = basketballController
+module.exports = basketballController
