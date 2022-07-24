@@ -1,6 +1,6 @@
 <div class="container-fluid mt-5">
     <div class="mx-auto" style="width:400px;height:400px; outline: tomato solid 3px;">
-        <form class="p-3">
+        <form action="/login" method="POST" class="p-3">
             <h1 class="text-center">Login</h1>
             {{> messages}}
             <div class="mb-3">
@@ -15,6 +15,6 @@
             </div>
             <button class="btn btn-primary" type="submit">login</button>
         </form>
-        <p class="lead ms-3">No Account? <a href="">Register</a></p>
+        <p class="lead ms-3">No Account? <a href="/register">Register</a></p>
     </div>
 </div>

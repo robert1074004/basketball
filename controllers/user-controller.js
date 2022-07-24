@@ -28,6 +28,18 @@ const userController = {
         res.redirect('/login')
       })
       .catch(err => next(err))
+  },
+  loginPage: (req,res) => {
+    res.render('login')
+  },
+  login: (req, res) => {
+    req.flash('success_messages','成功登入!')
+    res.redirect('/basketball')
+  },
+  logout: (req, res) => {
+    req.flash('success_messages','登出成功!')
+    req.logout()
+    res.redirect('/login')
   }
 }
 
