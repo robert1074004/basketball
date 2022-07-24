@@ -32,6 +32,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      efg: {
+        allowNull: false,
+        type: Sequelize.FLOAT
+      },
+      ts: {
+        allowNull: false,
+        type: Sequelize.FLOAT
+      },
+      to_v: {
+        allowNull: false,
+        type: Sequelize.FLOAT
+      },
       date: {
         allowNull: false,
         type: Sequelize.DATE

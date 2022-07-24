@@ -15,7 +15,7 @@
           <p class="mb-0">(有效命中率)</p>
         </div>
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          <div class="progress-bar" role="progressbar" style="width: {{EFG}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{efg}}</div>
         </div>
       </div>
       <div class="record-group my-2">
@@ -24,7 +24,7 @@
           <p class="mb-0">(真實命中率)</p>
         </div>
         <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          <div class="progress-bar bg-success" role="progressbar" style="width: {{TS}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ts}}</div>
         </div>
       </div>
       <div class="record-group">
@@ -33,13 +33,13 @@
           <p class="mb-0">(失誤率)</p>
         </div>
         <div class="progress">
-          <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          <div class="progress-bar bg-warning" role="progressbar" style="width: {{TO_V}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{to_v}}</div>
         </div>
       </div>
       
-      <h4 class="text-center mt-3">出賽場數 : 30</h4>
+      <h4 class="text-center mt-3">出賽場數 : {{game}}</h4>
       <div id="button" class="d-flex justify-content-center mt-3">
-        <a class="btn btn-primary btn-sm">add record</a>
+        <a class="btn btn-primary btn-sm" href="/basketball/form">add record</a>
       </div>
       
       

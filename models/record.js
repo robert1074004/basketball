@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     FGM: DataTypes.INTEGER,
     THREE_PM: DataTypes.INTEGER,
     TOV: DataTypes.INTEGER,
+    efg: DataTypes.FLOAT,
+    ts: DataTypes.FLOAT,
+    to_v: DataTypes.FLOAT,
     date: DataTypes.DATE
   }, {});
   Record.associate = function(models) {
