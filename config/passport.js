@@ -9,10 +9,8 @@ passport.use(new LocalStrategy({
     passReqToCallback: true
 },
 (req, email, password, cb) => {
-    console.log(email)
     User.findOne({ where: { email}})
       .then(user => {
-        console.log(user)
         if (!user) return cb(null, false, req.flash('error_messages','帳號或密碼輸入錯誤!'))
         bcrypt.compare(password, user.password)
           .then(res => {
@@ -29,7 +27,6 @@ passport.serializeUser((user, cb) => {
 
 passport.deserializeUser((id, cb) => {
     User.findByPk(id).then(user => {
-        console.log(user)
         return cb(null, user)
     })
 })
