@@ -1,4 +1,5 @@
 const { Record } = require('../models')
+const { User } = require('../models')
 const advanceData = require('../helpers/record-helpers')
 const basketballController = {
     getIndex: (req, res) => {
@@ -26,7 +27,6 @@ const basketballController = {
         const TO_V = to_v * 100
         res.render('index',{efg,ts,to_v,game,EFG,TS,TO_V})
       })
-     
     },
     getForm: (req, res) => {
       return res.render('form')

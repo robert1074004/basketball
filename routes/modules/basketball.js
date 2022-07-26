@@ -4,8 +4,8 @@ const basketballController = require('../../controllers/basketball-controller')
 
 router.get('/',basketballController.getIndex)
 router.get('/form',basketballController.getForm)
-router.get('/Record',basketballController.getRecord)
-router.post('/Record',basketballController.postRecord)
-router.get('/Rank',basketballController.getRank)
+router.get('/record',basketballController.getRecord)
+router.post('/record',basketballController.postRecord)
+router.get('/rank',basketballController.getRank)
 
 module.exports = router

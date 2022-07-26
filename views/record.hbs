@@ -14,12 +14,14 @@
                 <th scope="col">Efg%</th>
                 <th scope="col">Ts%</th>
                 <th scope="col">Tov%</th>
+                <th scope="col"></th>
+                
                 </tr>
             </thead>
             <tbody>
                 {{#each records}}
                 <tr>
-                <th scope="row">2022-07-24</th>
+                <th scope="row">{{this.date}}</th>
                 <td>{{this.PTS}}</td>
                 <td>{{this.FGA}}</td>
                 <td>{{this.FTA}}</td>
