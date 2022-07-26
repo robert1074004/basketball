@@ -9,7 +9,7 @@ const basketballController = {
       let FGM = 0
       let THREE_PM = 0
       let TOV = 0
-      Record.findAll({raw:true,nest:true})
+      Record.findAll({where: {UserId: req.user.id}})
         .then(records => {records.forEach(record => {
           PTS += (record.PTS / records.length)
           FGA += (record.FGA / records.length)
@@ -32,16 +32,17 @@ const basketballController = {
       return res.render('form')
     },
     postRecord: (req, res, next) => {
+      const UserId = req.user.id
       const {PTS, FGA, FTA, FGM, THREE_PM, TOV, date} = req.body
       const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
       const ts = advanceData.getTs(PTS,FTA,FGA)
       const to_v = advanceData.getTov(TOV,FTA,FGA)
-      Record.create({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v,UserId:1})
+      Record.create({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v,UserId})
         .then(() => res.redirect('/basketball/record'))
         .catch(err => next(err))
     },
     getRecord: (req, res) => {
-      Record.findAll({raw:true,nest:true})
+      Record.findAll({where: {UserId: req.user.id},raw:true,nest:true})
         .then(records =>  res.render('record',{records} ) ) 
     },
     getRank: (req, res) => {
