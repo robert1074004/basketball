@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const db = require('../models')
+const { localFileHandler } = require('../helpers/file-helpers')
 const { User } = db
 const userController = {
   registerPage: (req, res) => {
@@ -15,14 +16,18 @@ const userController = {
       })
       .then(user => {
         if (user) throw new Error('Email already exists!')
-        return bcrypt.hash(req.body.password, 10)
+        const { file } = req
+        return Promise.all([bcrypt.hash(req.body.password, 10), localFileHandler(file)])
       })
-      .then(hash => User.create({
-        name,
-        email,
-        position,
-        password: hash
-      }))
+      .then(([hash, filepath]) => {
+        User.create({
+          name,
+          email,
+          position,
+          password: hash,
+          image: filepath || null
+        })
+      })
       .then(() => {
         req.flash('success_messages', '成功註冊帳號!')
         res.redirect('/login')
