@@ -2,6 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const routes = require('./routes')
 const flash = require('connect-flash')
+const methodOverride = require('method-override')
 const path = require('path')
 const session = require('express-session')
 const passport = require('./config/passport')
@@ -9,8 +10,8 @@ const app = express()
 const port = process.env.PORT || 3000
 const SESSION_SECRET = 'secret'
 
+app.use(methodOverride('_method'))
 app.engine('hbs',exphbs({defaultLayout:'main',extname:'.hbs'}))
-
 app.set('view engine','hbs')
 
 app.use(express.static('public'))

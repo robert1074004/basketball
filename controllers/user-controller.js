@@ -45,6 +45,23 @@ const userController = {
     req.flash('success_messages','登出成功!')
     req.logout()
     res.redirect('/login')
+  },
+  editUser: (req, res) => {
+    res.render('profile_form')
+  },
+  putUser: (req, res, next) => {
+    const {name, position} = req.body
+    const { file } = req
+    if (!name) throw new Error("User's name is required!")
+    return Promise.all([User.findByPk(req.user.id), localFileHandler(file)])
+      .then(([user, filepath]) => {
+        if (!user) throw new Error("User didn't exist!")
+        return user.update({name, position, image: filepath || user.toJSON().image})
+      })
+      .then(() => {
+        res.redirect('/basketball')
+      })
+      .catch(err => next(err))
   }
 }
 
