@@ -29,7 +29,14 @@ const basketballController = {
       })
     },
     getForm: (req, res) => {
-      return res.render('form')
+      return res.render('create-form')
+    },
+    editForm: (req, res, next) => {
+      return Record.findByPk(req.params.id,{raw: true, nest: true})
+        .then(record => {
+          if (!record) throw new Error("Record didn't exist!")
+          res.render('edit-form', {record})})
+        .catch(err => next(err))
     },
     postRecord: (req, res, next) => {
       const UserId = req.user.id
@@ -38,6 +45,19 @@ const basketballController = {
       const ts = advanceData.getTs(PTS,FTA,FGA)
       const to_v = advanceData.getTov(TOV,FTA,FGA)
       Record.create({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v,UserId})
+        .then(() => res.redirect('/basketball/record'))
+        .catch(err => next(err))
+    },
+    putRecord: (req, res, next) => {
+      const {PTS, FGA, FTA, FGM, THREE_PM, TOV, date} = req.body
+      const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
+      const ts = advanceData.getTs(PTS,FTA,FGA)
+      const to_v = advanceData.getTov(TOV,FTA,FGA)
+      return Record.findByPk(req.params.id)
+        .then(record => {
+          if (!record) throw new Error("Record didn't exist!")
+          return record.update({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v})
+        })
         .then(() => res.redirect('/basketball/record'))
         .catch(err => next(err))
     },

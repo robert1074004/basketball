@@ -3,7 +3,7 @@
 const advanceData = {
     getEfg: (FGM,THREE_PM,FGA) => {
         let efg = (10*FGM+5*THREE_PM) / FGA
-        efg = efg / 10
+        efg = efg / 10 
         efg = efg.toFixed(2)
         return efg 
     },
