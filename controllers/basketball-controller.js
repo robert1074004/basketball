@@ -61,6 +61,15 @@ const basketballController = {
         .then(() => res.redirect('/basketball/record'))
         .catch(err => next(err))
     },
+    deleteRecord: (req, res, next) => {
+      return Record.findByPk(req.params.id)
+        .then(record => {
+          if (!record) throw new Error("Record didn't exist!")
+          return record.destroy()
+        })
+        .then(() => res.redirect('/basketball/record'))
+        .catch(err => next(err))
+    },
     getRecord: (req, res) => {
       Record.findAll({where: {UserId: req.user.id},raw:true,nest:true})
         .then(records =>  res.render('record',{records} ) ) 
