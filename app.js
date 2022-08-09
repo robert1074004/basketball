@@ -6,12 +6,13 @@ const methodOverride = require('method-override')
 const path = require('path')
 const session = require('express-session')
 const passport = require('./config/passport')
+const handlebarHelpres = require('./helpers/handlebars-helpers')
 const app = express()
 const port = process.env.PORT || 3000
 const SESSION_SECRET = 'secret'
 
 app.use(methodOverride('_method'))
-app.engine('hbs',exphbs({defaultLayout:'main',extname:'.hbs'}))
+app.engine('hbs',exphbs({defaultLayout:'main',extname:'.hbs',helpers: handlebarHelpres}))
 app.set('view engine','hbs')
 
 app.use(express.static('public'))

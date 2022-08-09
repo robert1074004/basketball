@@ -1,47 +1,68 @@
 <div class="container-fluid mt-3">
-    <div class="mx-auto" style="width:1000px;height:600px; border:solid 3px tomato;">
-        <h3 class="text-center my-2">數據排行榜(PLG)</h3>
+    <div class="mx-auto" style="width:1200px;height:600px; border:solid 3px tomato;">
+        <h3 class="text-center my-2">數據排行榜 (PLG例行賽)</h3>
+        <h6 class="ms-2 my-3">* Efg(有效命中率) Ts(真實命中率) Tov(失誤率)</h6>
+        <h6 class="ms-2 my-3">* 此排行榜只紀錄出賽至少20場的球員</h6>
+        <ul class="nav nav-tabs mb-1 d-flex justify-content-start">
+            <li class="nav-item">
+                <a class="nav-link {{#ifCond team ""}}active{{/ifCond}} " aria-current="page" href="?team">全部</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{#ifCond team "臺北富邦勇士"}}active{{/ifCond}}" href="?team=臺北富邦勇士">臺北富邦勇士</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{#ifCond team "桃園領航猿"}}active{{/ifCond}}" href="?team=桃園領航猿">桃園領航猿</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{#ifCond team "新竹街口攻城獅"}}active{{/ifCond}}" href="?team=新竹街口攻城獅">新竹街口攻城獅</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{#ifCond team "福爾摩沙台新夢想家"}}active{{/ifCond}}" href="?team=福爾摩沙台新夢想家">福爾摩沙台新夢想家</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{#ifCond team "高雄鋼鐵人"}}active{{/ifCond}}" href="?team=高雄鋼鐵人">高雄鋼鐵人</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{#ifCond team "新北國王"}}active{{/ifCond}}" href="?team=新北國王">新北國王</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    排列方式
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?sort=games&order=DESC&team={{team}}">games</a></li>
+                    <li><a class="dropdown-item" href="?sort=efg&order=DESC&team={{team}}">Efg</a></li>
+                    <li><a class="dropdown-item" href="?sort=ts&order=DESC&team={{team}}">Ts</a></li>
+                    <li><a class="dropdown-item" href="?sort=tov&order=ASC&team={{team}}">Tov</a></li>
+                </ul>
+            </li>
+        </ul>
         <table class="table table-hover">
-            <h6 class="ms-2 my-3">* Efg(有效命中率) Ts(真實命中率) Tov(失誤率)</h6>
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    {{!-- <th scope="col">#</th> --}}
                     <th scope="col">team</th>
                     <th scope="col">name</th>
-                    <th scope="col">games</th>     
+                    <th scope="col">games</th>
                     <th scope="col">Efg%</th>
                     <th scope="col">Ts%</th>
                     <th scope="col">Tov%</th>
                 </tr>
             </thead>
             <tbody>
+                {{#each plg}}
                 <tr>
-                    <th scope="row" style="font-size:20px;">1</th>
-                    <td>新北國王</td>
-                    <td>robert</td>
-                    <td>10</td>
-                    <td>25%</td>
-                    <td>25%</td>
-                    <td>25%</td>
+                    {{!-- <th scope="row" style="font-size:20px;">{{this.id}}</th> --}}
+                    <td>{{this.team}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.games}}</td>
+                    <td>{{this.efg}}</td>
+                    <td>{{this.ts}}</td>
+                    <td>{{this.tov}}</td>
                 </tr>
-                <tr>
-                    <th scope="row" style="font-size:20px;">2</th>
-                    <td>新北國王</td>
-                    <td>robert</td>
-                    <td>10</td>
-                    <td>25%</td>
-                    <td>25%</td>
-                    <td>25%</td>
-                </tr>
-                <tr>
-                    <th scope="row" style="font-size:20px;">3</th>
-                    <td>新北國王</td>
-                    <td>robert</td>
-                    <td>10</td>
-                    <td>25%</td>
-                    <td>25%</td>
-                    <td>25%</td>
-                </tr>
+                {{/each}}
+
             </tbody>
         </table>
     </div>

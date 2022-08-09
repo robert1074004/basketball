@@ -1,5 +1,5 @@
 const { Record } = require('../models')
-const { User } = require('../models')
+const { PLG } = require('../models')
 const advanceData = require('../helpers/record-helpers')
 const basketballController = {
     getIndex: (req, res) => {
@@ -75,7 +75,16 @@ const basketballController = {
         .then(records =>  res.render('record',{records} ) ) 
     },
     getRank: (req, res) => {
-      return res.render('rank')
+      const sort = req.query.sort || 'id'
+      const order = req.query.order || 'ASC'
+      const team = req.query.team || ''
+      const teams = ["臺北富邦勇士","桃園領航猿","新竹街口攻城獅","福爾摩沙台新夢想家","高雄鋼鐵人","新北國王"]
+      return PLG.findAll({ raw:true, nest:true, where: {...team ? {team} : {}}, order: [[sort, order]]})
+        .then(plg => {
+          plg = plg.filter(player => player.games >= 20)
+          res.render('rank', {plg, team})
+        }  
+        )
     }
 }
 module.exports = basketballController
