@@ -1,5 +1,6 @@
 const { Record } = require('../models')
 const { PLG } = require('../models')
+const { getOffset, getPagination } = require('../helpers/pagination-helper')
 const advanceData = require('../helpers/record-helpers')
 const basketballController = {
     getIndex: (req, res) => {
@@ -75,14 +76,17 @@ const basketballController = {
         .then(records =>  res.render('record',{records} ) ) 
     },
     getRank: (req, res) => {
+      const DEFAULT_LIMIT = 9
       const sort = req.query.sort || 'id'
       const order = req.query.order || 'ASC'
       const team = req.query.team || ''
-      const teams = ["臺北富邦勇士","桃園領航猿","新竹街口攻城獅","福爾摩沙台新夢想家","高雄鋼鐵人","新北國王"]
-      return PLG.findAll({ raw:true, nest:true, where: {...team ? {team} : {}}, order: [[sort, order]]})
+      const page = Number(req.query.page) || 1
+      const limit = Number(req.query.limit) || DEFAULT_LIMIT
+      const offset = getOffset(limit, page)
+      return PLG.findAndCountAll({ raw:true, nest:true, limit, offset, where: {...team ? {team} : {}}, order: [[sort, order]]})
         .then(plg => {
-          plg = plg.filter(player => player.games >= 20)
-          res.render('rank', {plg, team})
+          // plg = plg.rows.filter(player => player.games >= 20)
+          res.render('rank', {plg: plg.rows, team, pagination: getPagination(limit, page, plg.count), sort, order})
         }  
         )
     }
