@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 const db = require('../models')
-const { localFileHandler } = require('../helpers/file-helpers')
+const { imgurFileHandler } = require('../helpers/file-helpers')
 const { User } = db
 const userController = {
   registerPage: (req, res) => {
@@ -17,7 +17,7 @@ const userController = {
       .then(user => {
         if (user) throw new Error('Email already exists!')
         const { file } = req
-        return Promise.all([bcrypt.hash(req.body.password, 10), localFileHandler(file)])
+        return Promise.all([bcrypt.hash(req.body.password, 10), imgurFileHandler(file)])
       })
       .then(([hash, filepath]) => {
         User.create({
@@ -53,7 +53,7 @@ const userController = {
     const {name, position} = req.body
     const { file } = req
     if (!name) throw new Error("User's name is required!")
-    return Promise.all([User.findByPk(req.user.id), localFileHandler(file)])
+    return Promise.all([User.findByPk(req.user.id), imgurFileHandler(file)])
       .then(([user, filepath]) => {
         if (!user) throw new Error("User didn't exist!")
         return user.update({name, position, image: filepath || user.toJSON().image})
