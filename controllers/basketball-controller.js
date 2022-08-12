@@ -72,8 +72,13 @@ const basketballController = {
         .catch(err => next(err))
     },
     getRecord: (req, res) => {
-      Record.findAll({where: {UserId: req.user.id},raw:true,nest:true})
-        .then(records =>  res.render('record',{records} ) ) 
+      const DEFAULT_LIMIT = 9
+      console.log(req.query.page)
+      const page = Number(req.query.page) || 1
+      const limit = Number(req.query.limit) || DEFAULT_LIMIT
+      const offset = getOffset(limit, page)
+      return Record.findAndCountAll({where: {UserId: req.user.id},raw:true,nest:true, limit , offset})
+        .then(records =>  res.render('record',{records: records.rows, pagination: getPagination(limit, page, records.count)} ) ) 
     },
     getRank: (req, res) => {
       const DEFAULT_LIMIT = 9
