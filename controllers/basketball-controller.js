@@ -85,7 +85,6 @@ const basketballController = {
       const offset = getOffset(limit, page)
       return PLG.findAndCountAll({ raw:true, nest:true, limit, offset, where: {...team ? {team} : {}}, order: [[sort, order]]})
         .then(plg => {
-          // plg = plg.rows.filter(player => player.games >= 20)
           res.render('rank', {plg: plg.rows, team, pagination: getPagination(limit, page, plg.count), sort, order})
         }  
         )
