@@ -5,6 +5,7 @@ const advanceData = {
         let efg = (10*FGM+5*THREE_PM) / FGA
         efg = efg / 10 
         efg = efg.toFixed(2)
+        efg *= 100
         if (isNaN(efg)) {
             efg = 0
         }
@@ -13,6 +14,7 @@ const advanceData = {
     getTs: (PTS, FTA ,FGA) => {
         let ts = PTS / (2*((100*FGA+44*FTA)/100))
         ts = ts.toFixed(2)
+        ts *= 100
         if (isNaN(ts)) {
             ts = 0
         }
@@ -23,6 +25,7 @@ const advanceData = {
         denominator = denominator / 100
         let tov = TOV / denominator
         tov = tov.toFixed(2)
+        tov *= 100
         if (isNaN(tov)) {
             tov = 0
         }

@@ -2,6 +2,8 @@
     <div class="mx-auto" style="width:800px; ">
         <h3 class="text-center my-2">單場比賽數據</h3>
         <a class="btn btn-primary btn-sm ms-2 mb-1" href="/basketball/form">add record</a>
+        <p class="ms-2 my-3">* PTS(得分) FGA(投籃出手次數) FTA(罰球出手次數)FGM(投籃命中)  3PM(三分命中)  TOV(失誤次數)</p>
+        <p class="ms-2 my-3">* Efg%(有效命中率) Ts%(真實命中率) Tov%(失誤率)</p>
         <table class="table table-hover mt-3">
             <thead>
                 <tr>
@@ -29,9 +31,9 @@
                 <td>{{this.FGM}}</td>
                 <td>{{this.THREE_PM}}</td>
                 <td>{{this.TOV}}</td>
-                <td>{{this.efg}}</td>
-                <td>{{this.ts}}</td>
-                <td>{{this.to_v}}</td>
+                <td>{{this.efg}}%</td>
+                <td>{{this.ts}}%</td>
+                <td>{{this.to_v}}%</td>
                 <td class="d-flex justify-content-evenly">
                     <a class="btn btn-primary btn-sm" href="/basketball/form/edit/{{this.id}}">edit</a>
                     <form action="/basketball/record/{{this.id}}?_method=DELETE" method="POST">

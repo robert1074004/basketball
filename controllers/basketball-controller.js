@@ -20,12 +20,12 @@ const basketballController = {
           TOV += (record.TOV / records.length)
         })
         let game = records.length
-        const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
-        const ts = advanceData.getTs(PTS,FTA,FGA)
-        const to_v = advanceData.getTov(TOV,FTA,FGA)
-        const EFG = efg*100
-        const TS = ts*100
-        const TO_V = to_v * 100
+        const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
+        const TS = advanceData.getTs(PTS,FTA,FGA)
+        const TO_V = advanceData.getTov(TOV,FTA,FGA)
+        const efg = EFG / 100
+        const ts = TS / 100
+        const to_v = TO_V / 100
         res.render('index',{efg,ts,to_v,game,EFG,TS,TO_V})
       })
     },
@@ -73,7 +73,6 @@ const basketballController = {
     },
     getRecord: (req, res) => {
       const DEFAULT_LIMIT = 9
-      console.log(req.query.page)
       const page = Number(req.query.page) || 1
       const limit = Number(req.query.limit) || DEFAULT_LIMIT
       const offset = getOffset(limit, page)
