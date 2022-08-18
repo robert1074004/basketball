@@ -1,4 +1,52 @@
-.fa, .fas {
-  font-weight: 900;
-  font-style: italic;
-}
+
+  #record_panel{
+      width:350px;
+  }
+  #rank_panel{
+      width:350px;
+  }
+  #profile_panel{
+    width:350px;height:400px;
+  }
+  #user_panel{
+      width: 450px;
+      height: 400px;
+  } 
+  #register_panel{
+      width: 350px;
+  }
+  #login_panel{
+      width:350px;
+      height:400px;
+  }
+  #create_panel{
+      width:350px;
+  }
+  #edit_panel{
+      width: 350px;
+  }
+  #button_panel{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  .row{
+    display: block;
+  }
+  
+  
+  @media screen and (min-width:480px) {#record_panel{width:500px;}} 
+  @media screen and (min-width:480px) {#rank_panel{width:1200px;}}
+  @media screen and (min-width:480px) {#profile_panel{width:500px;height:500px;}}
+  @media screen and (min-width:480px) {#login_panel{width:400px;height:400px;}}
+  @media screen and (min-width:480px) {#register_panel{width:700px;}}
+  @media screen and (min-width:480px) {#user_panel{width:500px; height:400px;}}
+  @media screen and (min-width:480px) {#create_panel{width:700px; height:500px;}}
+  @media screen and (min-width:480px) {#edit_panel{width:700px; height:500px;}}  
+  @media screen and (min-width:480px) {.row{display:flex;}}
+  @media screen and (min-width:480px) {#team_type{display:none;}}
+  @media screen and (min-width:480px) {#basketball_logo{display:none;}}
+  @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
+  @media screen and (min-width:480px) {#button_panel{display:flex;justify-content: space-around; flex-direction: row;}}
+
+   

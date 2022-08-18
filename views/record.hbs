@@ -1,19 +1,12 @@
 <div class="container-fluid mt-3">
-    <div class="mx-auto" style="width:800px; ">
+    <div class="mx-auto" id = "record_panel">
         <h3 class="text-center my-2">單場比賽數據</h3>
         <a class="btn btn-primary btn-sm ms-2 mb-1" href="/basketball/form">add record</a>
-        <p class="ms-2 my-3">* PTS(得分) FGA(投籃出手次數) FTA(罰球出手次數)FGM(投籃命中)  3PM(三分命中)  TOV(失誤次數)</p>
         <p class="ms-2 my-3">* Efg%(有效命中率) Ts%(真實命中率) Tov%(失誤率)</p>
-        <table class="table table-hover mt-3">
+        <table class="table table-hover mt-3" id="record_table" >
             <thead>
                 <tr>
                 <th scope="col">date</th>
-                <th scope="col">PTS</th>
-                <th scope="col">FGA</th>
-                <th scope="col">FTA</th>
-                <th scope="col">FGM</th>
-                <th scope="col">3PM</th>
-                <th scope="col">TOV</th>
                 <th scope="col">Efg%</th>
                 <th scope="col">Ts%</th>
                 <th scope="col">Tov%</th>
@@ -25,17 +18,11 @@
                 {{#each records}}
                 <tr>
                 <th scope="row">{{this.date}}</th>
-                <td>{{this.PTS}}</td>
-                <td>{{this.FGA}}</td>
-                <td>{{this.FTA}}</td>
-                <td>{{this.FGM}}</td>
-                <td>{{this.THREE_PM}}</td>
-                <td>{{this.TOV}}</td>
                 <td>{{this.efg}}%</td>
                 <td>{{this.ts}}%</td>
                 <td>{{this.to_v}}%</td>
-                <td class="d-flex justify-content-evenly">
-                    <a class="btn btn-primary btn-sm" href="/basketball/form/edit/{{this.id}}">edit</a>
+                <td  id="button_panel">
+                    <a class="btn btn-primary btn-sm" href="/basketball/form/edit/{{this.id}}" id="button_edit">edit</a>
                     <form action="/basketball/record/{{this.id}}?_method=DELETE" method="POST">
                     <button class="btn btn-primary btn-sm" type="submit" onclick="return confirm(`確定要刪除此數據?`);">delete</button>
                     </form>
