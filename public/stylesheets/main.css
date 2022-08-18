@@ -1,34 +1,46 @@
 
   #record_panel{
-      width:350px;
+      width:320px;
   }
   #rank_panel{
       width:350px;
   }
   #profile_panel{
-    width:350px;height:400px;
+    width:300px;height:400px;
   }
   #user_panel{
-      width: 450px;
-      height: 400px;
+      width: 250px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
   } 
   #register_panel{
-      width: 350px;
+      width: 320px;
   }
   #login_panel{
-      width:350px;
+      width:300px;
       height:400px;
   }
   #create_panel{
-      width:350px;
+      width:300px;
   }
   #edit_panel{
-      width: 350px;
+      width: 300px;
   }
   #button_panel{
       display:flex;
       flex-direction: column;
       align-items: center;
+  }
+  #left_side{
+    display:none;
+  }
+  #img{
+    width:250px;
+    height:300px;
+  }
+  #show{
+    display:inline;
   }
   .row{
     display: block;
@@ -40,13 +52,17 @@
   @media screen and (min-width:480px) {#profile_panel{width:500px;height:500px;}}
   @media screen and (min-width:480px) {#login_panel{width:400px;height:400px;}}
   @media screen and (min-width:480px) {#register_panel{width:700px;}}
-  @media screen and (min-width:480px) {#user_panel{width:500px; height:400px;}}
+  @media screen and (min-width:480px) {#user_panel{width:500px; height:400px;display: flex; flex-direction: row;}}
   @media screen and (min-width:480px) {#create_panel{width:700px; height:500px;}}
   @media screen and (min-width:480px) {#edit_panel{width:700px; height:500px;}}  
   @media screen and (min-width:480px) {.row{display:flex;}}
   @media screen and (min-width:480px) {#team_type{display:none;}}
   @media screen and (min-width:480px) {#basketball_logo{display:none;}}
-  @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
   @media screen and (min-width:480px) {#button_panel{display:flex;justify-content: space-around; flex-direction: row;}}
+  @media screen and (min-width:480px) {#img{width:250px; height:300px;}}
+  @media screen and (min-width:480px) {#left_side{width:250px; display:block;}}
+  @media screen and (min-width:480px) {#show{display:none;}} 
+  @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
+  @media screen and (max-width:480px) {#p{margin-left:20px;}}
 
    
