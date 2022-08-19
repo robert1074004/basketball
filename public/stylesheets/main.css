@@ -1,6 +1,6 @@
 
   #record_panel{
-      width:320px;
+      width:350px;
   }
   #rank_panel{
       width:350px;
@@ -47,7 +47,7 @@
   }
   
   
-  @media screen and (min-width:480px) {#record_panel{width:500px;}} 
+  @media screen and (min-width:480px) {#record_panel{width:800px;}} 
   @media screen and (min-width:480px) {#rank_panel{width:1200px;}}
   @media screen and (min-width:480px) {#profile_panel{width:500px;height:500px;}}
   @media screen and (min-width:480px) {#login_panel{width:400px;height:400px;}}
@@ -63,6 +63,8 @@
   @media screen and (min-width:480px) {#left_side{width:250px; display:block;}}
   @media screen and (min-width:480px) {#show{display:none;}} 
   @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
+  @media screen and (max-width:480px) {#rank_table{width:500px;}}
+  @media screen and (max-width:480px) {#record_table{width:670px;}}
   @media screen and (max-width:480px) {#p{margin-left:20px;}}
 
    
