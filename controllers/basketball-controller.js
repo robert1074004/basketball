@@ -19,6 +19,12 @@ const basketballController = {
           THREE_PM += (record.THREE_PM / records.length)
           TOV += (record.TOV / records.length)
         })
+        PTS = PTS.toFixed()
+        FGA = FGA.toFixed()
+        FTA = FTA.toFixed()
+        FGM = FGM.toFixed()
+        THREE_PM = THREE_PM.toFixed()
+        TOV = TOV.toFixed()
         let game = records.length
         const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
         const TS = advanceData.getTs(PTS,FTA,FGA)
