@@ -23,10 +23,7 @@ const basketballController = {
         const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
         const TS = advanceData.getTs(PTS,FTA,FGA)
         const TO_V = advanceData.getTov(TOV,FTA,FGA)
-        const efg = EFG / 100
-        const ts = TS / 100
-        const to_v = TO_V / 100
-        res.render('index',{efg,ts,to_v,game,EFG,TS,TO_V})
+        res.render('index',{game,EFG,TS,TO_V})
       })
     },
     getForm: (req, res) => {
@@ -80,12 +77,15 @@ const basketballController = {
         .then(records =>  res.render('record',{records: records.rows, pagination: getPagination(limit, page, records.count)} ) ) 
     },
     getRank: (req, res) => {
-      const DEFAULT_LIMIT = 9
-      const sort = req.query.sort || 'id'
-      const order = req.query.order || 'ASC'
-      const team = req.query.team || ''
+      const DEFAULT_LIMIT = 10
+      const sorts = ['games','efg','ts','tov']
+      const orders = ['DESC','ASC']
+      const teams = ['臺北富邦勇士','桃園領航猿','新竹街口攻城獅','福爾摩沙台新夢想家','高雄鋼鐵人','新北國王']
+      const sort = sorts.find(sort => sort === req.query.sort) || 'id'
+      const order = orders.find(order => order === req.query.order) || 'ASC'
+      const team = teams.find(team => team === req.query.team ) || ''
       const page = Number(req.query.page) || 1
-      const limit = Number(req.query.limit) || DEFAULT_LIMIT
+      const limit =  DEFAULT_LIMIT
       const offset = getOffset(limit, page)
       return PLG.findAndCountAll({ raw:true, nest:true, limit, offset, where: {...team ? {team} : {}}, order: [[sort, order]]})
         .then(plg => {
