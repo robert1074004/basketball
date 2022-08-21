@@ -12,6 +12,6 @@ router.get('/record',basketballController.getRecord)
 router.post('/record',basketballController.postRecord)
 router.put('/record/:id',basketballController.putRecord)
 router.delete('/record/:id',basketballController.deleteRecord)
-router.get('/rank',basketballController.getRank)
+
 
 module.exports = router
