@@ -25,7 +25,7 @@ const userController = {
           email,
           position,
           password: hash,
-          image: filepath || null
+          image: filepath || 'https://i.imgur.com/Qo3mXjE.jpeg'
         })
       })
       .then(() => {
