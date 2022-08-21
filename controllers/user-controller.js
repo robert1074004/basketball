@@ -8,7 +8,7 @@ const userController = {
   },
   register: (req, res, next) => {
     const { name, email, password, confirmPassword, position } = req.body
-    if (name.trim() || email.trim() || password.trim() || confirmPassword.trim() || position.trim()) throw new Error('Some fields must be required')
+    if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim() || !position.trim()) throw new Error('Some fields must be required')
     if (password !== confirmPassword) throw new Error('Password do not match!')
     User.findOne({
         where: {
