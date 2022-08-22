@@ -53,7 +53,7 @@ const userController = {
   putUser: (req, res, next) => {
     const {name, position} = req.body
     const { file } = req
-    if (!name) throw new Error("User's name is required!")
+    if (!name.trim()) throw new Error("User's name is required!")
     return Promise.all([User.findByPk(req.user.id), imgurFileHandler(file)])
       .then(([user, filepath]) => {
         if (!user) throw new Error("User didn't exist!")

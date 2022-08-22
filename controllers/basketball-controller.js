@@ -48,6 +48,7 @@ const basketballController = {
       const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
       const ts = advanceData.getTs(PTS,FTA,FGA)
       const to_v = advanceData.getTov(TOV,FTA,FGA)
+      if (efg > 100 || ts > 100 || to_v > 100) throw new Error('Some fields were wrong !')
       Record.create({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v,UserId})
         .then(() => res.redirect('/basketball/record'))
         .catch(err => next(err))
@@ -57,6 +58,7 @@ const basketballController = {
       const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
       const ts = advanceData.getTs(PTS,FTA,FGA)
       const to_v = advanceData.getTov(TOV,FTA,FGA)
+      if (efg > 100 || ts > 100 || to_v > 100) throw new Error('Some fields were wrong !')
       return Record.findByPk(req.params.id)
         .then(record => {
           if (!record) throw new Error("Record didn't exist!")
