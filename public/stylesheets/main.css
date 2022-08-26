@@ -64,7 +64,7 @@
   @media screen and (min-width:480px) {#show{display:none;}}
   @media screen and (min-width:480px) {#collapseExample{display:none;}} 
   @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
-  @media screen and (max-width:480px) {#rank_table{width:500px;}}
+  @media screen and (max-width:480px) {#rank_table{width:580px;}}
   @media screen and (max-width:480px) {#record_table{width:670px;}} 
   @media screen and (max-width:480px) {#p{margin-left:20px;}}
   
