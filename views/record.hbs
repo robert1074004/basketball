@@ -18,7 +18,7 @@
                         <th scope="col">Efg%</th>
                         <th scope="col">Ts%</th>
                         <th scope="col">Tov%</th>
-                        <th scope="col"></th>
+                        {{!-- <th scope="col"></th> --}}
 
                     </tr>
                 </thead>
@@ -35,6 +35,7 @@
                         <td>{{this.efg}}%</td>
                         <td>{{this.ts}}%</td>
                         <td>{{this.to_v}}%</td>
+                        {{#ifCond ../user.id ../user_id}}
                         <td id="button_panel">
                             <a class="btn btn-primary btn-sm" href="/basketball/form/edit/{{this.id}}"
                                 id="button_edit">edit</a>
@@ -43,6 +44,7 @@
                                     onclick="return confirm(`確定要刪除此數據?`);">delete</button>
                             </form>
                         </td>
+                        {{/ifCond}}
                     </tr>
                     {{/each}}
                 </tbody>
@@ -72,7 +74,11 @@
                     </li>
                 </ul>
             </nav>
+            {{#ifCond user.id user_id}}
             <a class="btn btn-primary btn-sm ms-3 " href="/basketball/form">add record</a>
+            {{else}}
+            <a class="btn btn-primary btn-sm ms-3 " href="javascript:history.back(-1)">back</a>
+            {{/ifCond}}
         </div>
 
 

@@ -45,7 +45,15 @@
   .row{
     display: block;
   }
-  
+  #other_img{
+    width:100px;
+    height:120px;
+  }
+  #other_users{
+    width:150px;
+    height: 400px;
+    overflow-y: scroll;
+  }
   
   @media screen and (min-width:480px) {#record_panel{width:800px;}} 
   @media screen and (min-width:480px) {#rank_panel{width:1200px;}}

@@ -1,36 +1,39 @@
 const { Record } = require('../models')
-const { PLG } = require('../models')
+const { PLG, User } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 const advanceData = require('../helpers/record-helpers')
 const basketballController = {
     getIndex: (req, res) => {
+      const user_id = Number(req.params.id) || req.user.id
       let PTS = 0 
       let FGA = 0
       let FTA = 0
       let FGM = 0
       let THREE_PM = 0
       let TOV = 0
-      Record.findAll({where: {UserId: req.user.id}})
-        .then(records => {records.forEach(record => {
-          PTS += (record.PTS / records.length)
-          FGA += (record.FGA / records.length)
-          FTA += (record.FTA / records.length)
-          FGM += (record.FGM / records.length)
-          THREE_PM += (record.THREE_PM / records.length)
-          TOV += (record.TOV / records.length)
+      Promise.all([User.findAll({ nest: true, raw:true }), User.findByPk(user_id, { include: Record, nest: true,  })])
+        .then(([users, user]) => {
+          other_user = user.toJSON()
+          user.Records.forEach(record => {
+            PTS += (record.PTS / user.Records.length)
+            FGA += (record.FGA / user.Records.length)
+            FTA += (record.FTA / user.Records.length)
+            FGM += (record.FGM / user.Records.length)
+            THREE_PM += (record.THREE_PM / user.Records.length)
+            TOV += (record.TOV / user.Records.length)
+          })
+          PTS = PTS.toFixed()
+          FGA = FGA.toFixed()
+          FTA = FTA.toFixed()
+          FGM = FGM.toFixed()
+          THREE_PM = THREE_PM.toFixed()
+          TOV = TOV.toFixed()
+          let game = user.Records.length
+          const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
+          const TS = advanceData.getTs(PTS,FTA,FGA)
+          const TO_V = advanceData.getTov(TOV,FTA,FGA)
+          res.render('index',{game,EFG,TS,TO_V,users,other_user})
         })
-        PTS = PTS.toFixed()
-        FGA = FGA.toFixed()
-        FTA = FTA.toFixed()
-        FGM = FGM.toFixed()
-        THREE_PM = THREE_PM.toFixed()
-        TOV = TOV.toFixed()
-        let game = records.length
-        const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
-        const TS = advanceData.getTs(PTS,FTA,FGA)
-        const TO_V = advanceData.getTov(TOV,FTA,FGA)
-        res.render('index',{game,EFG,TS,TO_V})
-      })
     },
     getForm: (req, res) => {
       return res.render('create-form')
@@ -77,12 +80,13 @@ const basketballController = {
         .catch(err => next(err))
     },
     getRecord: (req, res) => {
+      const user_id = Number(req.params.id) || req.user.id
       const DEFAULT_LIMIT = 9
       const page = Number(req.query.page) || 1
       const limit = Number(req.query.limit) || DEFAULT_LIMIT
       const offset = getOffset(limit, page)
-      return Record.findAndCountAll({where: {UserId: req.user.id},raw:true,nest:true, limit , offset})
-        .then(records =>  res.render('record',{records: records.rows, pagination: getPagination(limit, page, records.count)} ) ) 
+      return Record.findAndCountAll({where: {UserId: user_id},raw:true,nest:true, limit , offset})
+        .then(records =>  res.render('record',{records: records.rows, pagination: getPagination(limit, page, records.count), user_id} ) ) 
     },
     getRank: (req, res) => {
       const DEFAULT_LIMIT = 10

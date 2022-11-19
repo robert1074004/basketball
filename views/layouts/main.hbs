@@ -14,7 +14,7 @@
   <div class="container-fluid">
     <div class="d-flex align-items-center">
         <i class="fa-solid fa-basketball fa-xl"></i>
-        <a  class="navbar-brand ms-2">Basketball statistic</a>
+        <a  class="navbar-brand ms-2" href="/basketball/:id">Basketball statistic</a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -27,10 +27,10 @@
         </li>
         {{#if isAuthenticated}}
         <li class="nav-item">
-          <a class="nav-link active" href="/basketball">生涯比賽數據</a>
+          <a class="nav-link active" href="/basketball/:id">球員生涯</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/basketball/record">單場比賽數據</a>
+          <a class="nav-link active" aria-current="page" href="/basketball/record/:id">球員數據</a>
         </li>
         <li class="nav-item">
           <a href="/logout" class="nav-link active">Logout</a>

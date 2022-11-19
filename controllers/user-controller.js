@@ -40,7 +40,7 @@ const userController = {
   },
   login: (req, res) => {
     req.flash('success_messages','成功登入!')
-    res.redirect('/basketball')
+    res.redirect('/basketball/:id')
   },
   logout: (req, res) => {
     req.flash('success_messages','登出成功!')
