@@ -1,0 +1,65 @@
+<h3 class="text-center mt-3">推薦球員</h3>
+<div class="container-fluid mt-3 d-flex flex-column align-items-center">
+    <form class="row g-3" action="/basketball/top-player">
+        <div class="col-auto">
+            <label for="player" class="visually-hidden"></label>
+            <input type="text" class="form-control" id="player" placeholder="球員名稱" name="player" value="{{player}}">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">搜尋球員</button>
+            <a class="btn btn-primary mb-3" href="/basketball/top-player">刷新球員</a>
+        </div>
+    </form>
+    <div class="d-flex flex-wrap " style="outline: 3px solid tomato; width:920px;">
+        {{#each users}}
+        <div class="card mx-2 my-2 border border-3 rounded-3 border-warning" style="width: 18rem;">
+            <div class="text-center"><img src="{{this.image}}" class="card-img-top mt-2" alt="..."
+                    style="height: 200px; width:200px;"></div>
+
+            <div class="card-body text-center mx-auto" style="width:200px;">
+                <h3 class="card-title">{{this.name}}</h3>
+                <h6 class="mt-2">Efg%(有效命中率)</h6>
+                <div class="progress">
+
+                    <div class="progress-bar" role="progressbar" aria-label="Example with label"
+                        style="width: {{#if this.latest.efg}}{{this.latest.efg}}{{else}}0{{/if}}%;" aria-valuenow="25"
+                        aria-valuemin="0" aria-valuemax="100">{{#if
+                        this.latest.efg}}{{this.latest.efg}}{{else}}0{{/if}}%</div>
+                </div>
+                <h6 class="mt-2">Ts%(真實命中率)</h6>
+                <div class="progress">
+
+                    <div class="progress-bar bg-success" role="progressbar" aria-label="Example with label"
+                        style="width: {{#if this.latest.ts}}{{this.latest.ts}}{{else}}0{{/if}}%;" aria-valuenow="25"
+                        aria-valuemin="0" aria-valuemax="100">{{#if this.latest.ts}}{{this.latest.ts}}{{else}}0{{/if}}%
+                    </div>
+                </div>
+                <h6 class="mt-2">Tov%(失誤率)</h6>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" aria-label="Example with label"
+                        style="width: {{#if this.latest.to_v}}{{this.latest.to_v}}{{else}}0{{/if}}%;" aria-valuenow="25"
+                        aria-valuemin="0" aria-valuemax="100">{{#if
+                        this.latest.to_v}}{{this.latest.to_v}}{{else}}0{{/if}}%</div>
+                </div>
+                <h6 class="mt-2">比賽日期 : {{this.latest.date}}</h6>
+                <div class="my-2" id="span">
+                    <span class="bg-info badge ">追蹤人數：{{this.followerCount}}</span>
+                    <span class="bg-success badge ">位置：{{this.position}}</span>
+                </div>
+                {{#if this.isFollowed}}
+                <form action="/following/{{this.id}}?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-warning btn-sm">取消追蹤</button>
+                    <a class="btn btn-primary btn-sm my-2" href="/basketball/{{this.id}}">view</a>
+                </form>
+                {{else}}
+                <form action="/following/{{this.id}}" method="POST">
+                    <button type="submit" class="btn btn-info btn-sm">追蹤</button>
+                    <a class="btn btn-primary btn-sm my-2" href="/basketball/{{this.id}}">view</a>
+                </form>
+                {{/if}}
+
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

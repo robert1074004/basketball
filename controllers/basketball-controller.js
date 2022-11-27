@@ -3,7 +3,7 @@ const { PLG, User } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 const advanceData = require('../helpers/record-helpers')
 const basketballController = {
-    getIndex: (req, res) => {
+    getIndex: (req, res, next) => {
       const user_id = Number(req.params.id) || req.user.id
       let PTS = 0 
       let FGA = 0
@@ -11,9 +11,13 @@ const basketballController = {
       let FGM = 0
       let THREE_PM = 0
       let TOV = 0
-      Promise.all([User.findAll({ nest: true, raw:true }), User.findByPk(user_id, { include: Record, nest: true,  })])
-        .then(([users, user]) => {
-          other_user = user.toJSON()
+      return User.findByPk(user_id, { include: [Record, { model: User, as: 'Followers' }], nest: true,  })
+        .then(( user) => {
+          if (!user) throw new Error("This user didn't exist!")
+          const other_user = {...user.toJSON(),
+            followerCount: user.toJSON().Followers.length,
+            isFollowed: req.user.Followings.some(f => f.id === user.toJSON().id)
+          }
           user.Records.forEach(record => {
             PTS += (record.PTS / user.Records.length)
             FGA += (record.FGA / user.Records.length)
@@ -32,8 +36,9 @@ const basketballController = {
           const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
           const TS = advanceData.getTs(PTS,FTA,FGA)
           const TO_V = advanceData.getTov(TOV,FTA,FGA)
-          res.render('index',{game,EFG,TS,TO_V,users,other_user})
+          res.render('index',{game,EFG,TS,TO_V,other_user})
         })
+        .catch(err => next(err))
     },
     getForm: (req, res) => {
       return res.render('create-form')
@@ -79,14 +84,18 @@ const basketballController = {
         .then(() => res.redirect('/basketball/record'))
         .catch(err => next(err))
     },
-    getRecord: (req, res) => {
+    getRecord: (req, res, next) => {
       const user_id = Number(req.params.id) || req.user.id
       const DEFAULT_LIMIT = 9
       const page = Number(req.query.page) || 1
       const limit = Number(req.query.limit) || DEFAULT_LIMIT
       const offset = getOffset(limit, page)
       return Record.findAndCountAll({where: {UserId: user_id},raw:true,nest:true, limit , offset})
-        .then(records =>  res.render('record',{records: records.rows, pagination: getPagination(limit, page, records.count), user_id} ) ) 
+        .then(records =>  {
+          if (!records) throw new Error("This user didn't exist")
+          res.render('record',{records: records.rows, pagination: getPagination(limit, page, records.count), user_id} )
+        })
+        .catch(err => next(err))
     },
     getRank: (req, res) => {
       const DEFAULT_LIMIT = 10
@@ -108,6 +117,28 @@ const basketballController = {
           res.render('rank', {plg: Plg, team, pagination: getPagination(limit, page, plg.count), sort, order})
         }  
         )
+    },
+    getPlayer: (req, res, next) => {
+      const player = req.query.player?.trim().toLowerCase() || ""
+      return User.findAll({ include: [{ model: User, as: 'Followers' }, Record],nest:true})
+        .then((users) => {
+          if (!users) throw new Error("Users didn't exist! ")
+          all_user = users.map(user => ({
+            ...user.toJSON(),
+            followerCount: user.Followers.length,
+            isFollowed: req.user.Followings.some(f => f.id === user.id),
+            latest: user.toJSON().Records.pop() || {}
+          }))
+          
+          if (!player) {
+            all_user = all_user.sort((a,b) => b.followerCount - a.followerCount)
+            let number = Math.floor(Math.random()*users.length)
+            all_user = all_user.splice(number,3)
+          }
+          all_user = all_user.filter(user => user.name.toLowerCase().includes(player))
+          res.render('top-player', { users: all_user, player})
+        })
+        .catch(err => next(err))  
     }
 }
 module.exports = basketballController

@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const db = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
-const { User } = db
+const { User, Followship } = db
 const userController = {
   registerPage: (req, res) => {
     res.render('register')
@@ -63,6 +63,40 @@ const userController = {
       })
       .then(() => {
         res.redirect('/basketball')
+      })
+      .catch(err => next(err))
+  },
+  addFollowing: (req, res, next) => {
+    const { userId } = req.params
+    Promise.all([User.findByPk(userId), Followship.findOne({ where: { followerId: req.user.id, followingId: req.params.userId }})])
+      .then(([user, followship]) => {
+        if (!user) throw new Error("User didn't exist!")
+        if (followship) throw new Error('You are already following this user')
+        return Followship.create({
+          followerId: req.user.id,
+          followingId: userId
+        })
+      })
+      .then(() => {
+        req.flash('success_messages','追蹤成功!')
+        res.redirect('back')
+      })
+      .catch(err => next(err))
+  },
+  removeFollowing: (req, res, next) => {
+    Followship.findOne({
+      where: {
+        followerId: req.user.id,
+        followingId: req.params.userId
+      }
+    })
+      .then(followship => {
+        if (!followship) throw new Error("You haven't followed this user!")
+        return followship.destroy()
+      })
+      .then(() => {
+        req.flash('success_messages','取消追蹤成功!')
+        res.redirect('back')
       })
       .catch(err => next(err))
   }
