@@ -2,7 +2,7 @@
   <aside class="d-flex flex-column " style=" outline:solid 3px tomato;">
     <h5 class="mt-3 mb-0 text-center">你的球迷</h5>
     <aside class="d-flex flex-column p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
-      {{#each user.Followers}}
+      {{#each fans}}
       <div class="text-center border border-3 rounded-3 border-warning mb-2" id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
         <img class="p-2" src="{{this.image}}" id="other_img">
@@ -120,11 +120,11 @@
   <aside class="d-flex flex-column " style=" outline:solid 3px tomato;">
     <h5 class="mt-3 mb-0 text-center">追蹤球員</h5>
     <aside class="d-flex flex-column p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
-      {{#each user.Followings}}
+      {{#each followings}}
       <div class="text-center border border-3 rounded-3 border-warning mb-2" id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
         <img class="p-2" src="{{this.image}}" id="other_img">
-         <span class="bg-success badge mb-2">位置：{{this.position}}</span>
+         <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
         <a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a>
         
       </div>

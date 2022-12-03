@@ -11,8 +11,17 @@ const basketballController = {
       let FGM = 0
       let THREE_PM = 0
       let TOV = 0
-      return User.findByPk(user_id, { include: [Record, { model: User, as: 'Followers' }], nest: true,  })
-        .then(( user) => {
+      return Promise.all([User.findByPk(user_id, { include: [Record, { model: User, as: 'Followers' }], nest: true,  }),User.findAll({ include: [Record, { model: User, as: 'Followers' }, { model: User, as: 'Followings' }],  nest: true})])
+        .then(( [user, users]) => {
+          if (!users) throw new Error("Users didn't exist! ")
+          all_user = users.map(user => ({
+            ...user.toJSON(),
+            followerCount: user.Followers.length,
+            isFollowed: req.user.Followings.some(f => f.id === user.id),
+            isFans: req.user.Followers.some(f => f.id === user.id)
+          }))
+          const followings = all_user.filter(user => user.isFollowed)
+          const fans = all_user.filter(user => user.isFans)
           if (!user) throw new Error("This user didn't exist!")
           const other_user = {...user.toJSON(),
             followerCount: user.toJSON().Followers.length,
@@ -36,7 +45,7 @@ const basketballController = {
           const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
           const TS = advanceData.getTs(PTS,FTA,FGA)
           const TO_V = advanceData.getTov(TOV,FTA,FGA)
-          res.render('index',{game,EFG,TS,TO_V,other_user})
+          res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans})
         })
         .catch(err => next(err))
     },
