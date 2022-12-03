@@ -1,6 +1,6 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" id="record_panel">
-        <h3 class="text-center my-2">單場比賽數據</h3>
+        <h3 class="text-center my-2">{{other_user.name}}的比賽數據</h3>
         <h6 class="ms-2 mt-3">* PTS(得分) FGM(投籃命中) 3PM(三分命中)</h6>
         <h6 class="ms-2 my-3">* FGA(投籃出手數) FTA(罰球出手數) TOV(失誤)</h6>
         <h6 class="ms-2 ">* Efg(有效命中率) Ts(真實命中率) Tov(失誤率)</h6>
@@ -18,7 +18,7 @@
                         <th scope="col">Efg%</th>
                         <th scope="col">Ts%</th>
                         <th scope="col">Tov%</th>
-                        {{!-- <th scope="col"></th> --}}
+                        <th scope="col"></th>
 
                     </tr>
                 </thead>
@@ -35,7 +35,7 @@
                         <td>{{this.efg}}%</td>
                         <td>{{this.ts}}%</td>
                         <td>{{this.to_v}}%</td>
-                        {{#ifCond ../user.id ../user_id}}
+                        {{#ifCond ../user.id ../other_user.id}}
                         <td id="button_panel">
                             <a class="btn btn-primary btn-sm" href="/basketball/form/edit/{{this.id}}"
                                 id="button_edit">edit</a>
@@ -74,7 +74,7 @@
                     </li>
                 </ul>
             </nav>
-            {{#ifCond user.id user_id}}
+            {{#ifCond user.id other_user.id}}
             <a class="btn btn-primary btn-sm ms-3 " href="/basketball/form">add record</a>
             {{else}}
             <a class="btn btn-primary btn-sm ms-3 " href="javascript:history.back(-1)">back</a>
