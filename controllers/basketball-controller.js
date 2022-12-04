@@ -132,6 +132,10 @@ const basketballController = {
         )
     },
     getPlayer: (req, res, next) => {
+      const DEFAULT_LIMIT = 3
+      const page = Number(req.query.page) || 1
+      const limit = Number(req.query.limit) || DEFAULT_LIMIT
+      const offset = getOffset(limit, page)
       const player = req.query.player?.trim().toLowerCase() || ""
       return User.findAll({ include: [{ model: User, as: 'Followers' }, Record],nest:true})
         .then((users) => {
@@ -140,16 +144,17 @@ const basketballController = {
             ...user.toJSON(),
             followerCount: user.Followers.length,
             isFollowed: req.user.Followings.some(f => f.id === user.id),
-            latest: user.toJSON().Records.pop() || {}
-          }))
-          
+            latest: user.toJSON().Records.pop() || {},
+            comprehensive: user.toJSON().Records.pop()?.efg+user.toJSON().Records.pop()?.ts - user.toJSON().Records.pop()?.to_v || 0
+          })) 
           if (!player) {
-            all_user = all_user.sort((a,b) => b.followerCount - a.followerCount)
-            let number = Math.floor(Math.random()*users.length)
-            all_user = all_user.splice(number,3)
+            all_user = all_user.filter(user => user.comprehensive >= 85)
           }
+          all_user = all_user.sort((a,b) => b.comprehensive - a.comprehensive)
           all_user = all_user.filter(user => user.name.toLowerCase().includes(player))
-          res.render('top-player', { users: all_user, player})
+          const length = all_user.length
+          all_user = all_user.slice(offset, offset+limit)
+          res.render('top-player', { users: all_user, player, pagination: getPagination(limit, page, length)})
         })
         .catch(err => next(err))  
     }
