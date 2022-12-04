@@ -20,8 +20,8 @@ const basketballController = {
             isFollowed: req.user.Followings.some(f => f.id === user.id),
             isFans: req.user.Followers.some(f => f.id === user.id)
           }))
-          const followings = all_user.filter(user => user.isFollowed)
-          const fans = all_user.filter(user => user.isFans)
+          const followings = all_user.filter(user => user.isFollowed).sort((a,b) => b.followerCount - a.followerCount)
+          const fans = all_user.filter(user => user.isFans).sort((a,b) => b.followerCount - a.followerCount)
           if (!user) throw new Error("This user didn't exist!")
           const other_user = {...user.toJSON(),
             followerCount: user.toJSON().Followers.length,

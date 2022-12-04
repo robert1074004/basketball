@@ -6,8 +6,8 @@
       <div class="text-center border border-3 rounded-3 border-warning mb-2" id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
         <img class="p-2" src="{{this.image}}" id="other_img">
-         <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
-        <a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a>  
+        <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
+        <a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a>
       </div>
       {{/each}}
     </aside>
@@ -16,9 +16,11 @@
   <div class="d-flex " style=" outline:solid 3px tomato;" id="user_panel">
     <div class="text-center" id="right_side">
       <img class="p-3" src="{{other_user.image}}" id="img">
-      <h5>球員名稱 : {{other_user.name}}</h5>
-      <h5>位置 : {{other_user.position}}</h5>
-      <h5><span class="bg-info badge">追蹤人數：{{other_user.followerCount}}</span></h5>
+      <h5><b>球員名稱 : {{other_user.name}}</b></h5>
+      <div class="mt-2 d-flex justify-content-center" id="span">
+        <h5><span class="bg-info badge ">追蹤人數：{{other_user.followerCount}}</span></h5>
+        <h5 class="ms-2"><span class="bg-success badge ">位置：{{other_user.position}}</span></h5>
+      </div>
       <p>
         <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
           aria-expanded="false" aria-controls="collapseExample" id="show">
@@ -59,7 +61,7 @@
         </div>
       </div>
       <h4 class="text-center mt-3">出賽場數 : {{game}}</h4>
-     
+
       <div id="button" class="d-flex justify-content-center mt-3">
         {{#ifCond user.id other_user.id}}
         <a class="btn btn-primary btn-sm me-3" href="/basketball/user/edit">edit user</a>
@@ -67,11 +69,11 @@
         {{else}}
         {{#if other_user.isFollowed}}
         <form action="/following/{{other_user.id}}?_method=DELETE" method="POST" class="me-2">
-        <button type="submit" class="btn btn-warning btn-sm">取消追蹤</button>
+          <button type="submit" class="btn btn-warning btn-sm">取消追蹤</button>
         </form>
         {{else}}
         <form action="/following/{{other_user.id}}" method="POST" class="me-2">
-        <button type="submit" class="btn btn-info btn-sm">追蹤</button>
+          <button type="submit" class="btn btn-info btn-sm">追蹤</button>
         </form>
         {{/if}}
         <a class="btn btn-primary btn-sm" href="/basketball/record/{{other_user.id}}">view record</a>
@@ -124,9 +126,9 @@
       <div class="text-center border border-3 rounded-3 border-warning mb-2" id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
         <img class="p-2" src="{{this.image}}" id="other_img">
-         <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
+        <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
         <a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a>
-        
+
       </div>
       {{/each}}
     </aside>
