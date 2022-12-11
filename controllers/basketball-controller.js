@@ -22,6 +22,8 @@ const basketballController = {
           }))
           const followings = all_user.filter(user => user.isFollowed).sort((a,b) => b.followerCount - a.followerCount)
           const fans = all_user.filter(user => user.isFans).sort((a,b) => b.followerCount - a.followerCount)
+          const follow = followings[0]
+          const fan = fans[0]
           if (!user) throw new Error("This user didn't exist!")
           const other_user = {...user.toJSON(),
             followerCount: user.toJSON().Followers.length,
@@ -45,7 +47,7 @@ const basketballController = {
           const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
           const TS = advanceData.getTs(PTS,FTA,FGA)
           const TO_V = advanceData.getTov(TOV,FTA,FGA)
-          res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans})
+          res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans,follow,fan})
         })
         .catch(err => next(err))
     },

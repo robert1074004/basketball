@@ -1,19 +1,22 @@
-<div class="container-fluid mt-5 d-flex justify-content-evenly">
-  <aside class="d-flex flex-column " style=" outline:solid 3px tomato;">
+<div class="container-fluid my-5 " id="container">
+  {{!-- fansAside --}}
+  <aside style=" outline:solid 3px tomato;" id="follow">
     <h5 class="mt-3 mb-0 text-center">你的球迷</h5>
-    <aside class="d-flex flex-column p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
+    <aside class=" p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
       {{#each fans}}
-      <div class="text-center border border-3 rounded-3 border-warning mb-2" id="other_user">
+      <div class="mb-2 text-center border border-3 rounded-3 border-warning " id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
         <img class="p-2" src="{{this.image}}" id="other_img">
-        <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
+        <span class="bg-info badge mb-2" >追蹤人數：{{this.followerCount}}</span>
         <a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a>
       </div>
       {{/each}}
     </aside>
   </aside>
 
-  <div class="d-flex " style=" outline:solid 3px tomato;" id="user_panel">
+
+  {{!-- userPanel --}}
+  <div class="tabindex= 0" style=" outline:solid 3px tomato;" id="user_panel" data-bs-spy="scroll">
     <div class="text-center" id="right_side">
       <img class="p-3" src="{{other_user.image}}" id="img">
       <h5><b>球員名稱 : {{other_user.name}}</b></h5>
@@ -21,12 +24,6 @@
         <h5><span class="bg-info badge ">追蹤人數：{{other_user.followerCount}}</span></h5>
         <h5 class="ms-2"><span class="bg-success badge ">位置：{{other_user.position}}</span></h5>
       </div>
-      <p>
-        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-          aria-expanded="false" aria-controls="collapseExample" id="show">
-          show
-        </button>
-      </p>
     </div>
     <div id="left_side" class="p-3 mt-4">
       <h3 class="text-center mb-2">生涯比賽數據</h3>
@@ -80,57 +77,131 @@
         {{/ifCond}}
       </div>
     </div>
-    <div id="collapseExample" class="p-3 mt-2 collapse">
-      <h3 class="text-center mb-2">生涯比賽數據</h3>
-      <div class="record-group">
-        <div class="d-flex align-items-center">
-          <h3>Efg%</h3>
-          <p class="mb-0">(有效命中率)</p>
-        </div>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width:{{#if game}}{{EFG}}{{else}}0{{/if}}%;"
-            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{#if game}}{{EFG}}%{{else}}0{{/if}}</div>
-        </div>
-      </div>
-      <div class="record-group my-2">
-        <div class="d-flex align-items-center">
-          <h3>Ts%</h3>
-          <p class="mb-0">(真實命中率)</p>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: {{#if game}}{{TS}}{{else}}0{{/if}}%;"
-            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{#if game}}{{TS}}%{{else}}0{{/if}}</div>
-        </div>
-      </div>
-      <div class="record-group">
-        <div class="d-flex align-items-center">
-          <h3>Tov%</h3>
-          <p class="mb-0">(失誤率)</p>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-warning" role="progressbar" style="width: {{#if game}}{{TO_V}}{{else}}0{{/if}}%;"
-            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{#if game}}{{TO_V}}%{{else}}0{{/if}}</div>
-        </div>
-      </div>
-      <h4 class="text-center mt-3">出賽場數 : {{game}}</h4>
-      <div id="button" class="d-flex justify-content-center mt-3">
-        <a class="btn btn-primary btn-sm me-3" href="/basketball/user/edit">edit user</a>
-        <a class="btn btn-primary btn-sm" href="/basketball/record">create record</a>
-      </div>
-    </div>
   </div>
-  <aside class="d-flex flex-column " style=" outline:solid 3px tomato;">
+  {{!-- followingsAside --}}
+  <aside style=" outline:solid 3px tomato;" id="follow">
     <h5 class="mt-3 mb-0 text-center">追蹤球員</h5>
-    <aside class="d-flex flex-column p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
+    <aside class=" p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
       {{#each followings}}
-      <div class="text-center border border-3 rounded-3 border-warning mb-2" id="other_user">
+      <div class=" mb-2 text-center border border-3 rounded-3 border-warning " id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
         <img class="p-2" src="{{this.image}}" id="other_img">
-        <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
+        <span class="bg-info badge mb-2" >追蹤人數：{{this.followerCount}}</span>
         <a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a>
 
       </div>
       {{/each}}
     </aside>
   </aside>
+  <!-- Button trigger followModal -->
+  <div id="follow_button">
+    <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#followingsModal">
+      追蹤球員
+    </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fansModal">
+      我的球迷
+    </button>
+  </div>
+
+
+  <!-- followingModal -->
+  <div class="modal fade" id="followingsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">追蹤球員</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        {{#if followings}}
+        <div class="modal-body">
+          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner bg-light">
+              {{#each followings}}
+              <div class="carousel-item {{#ifCond ../follow.id this.id}}active{{/ifCond}}">
+                <div class="ms-2 d-flex flex-column align-items-center" style="width: 18rem; ">
+                  <img class="d-block border border-warning border-4 rounded-3  my-2" src="{{this.image}}" alt="..."
+                    style="width:200px; height:250px;">
+                  <div class="card-body text-center">
+                    <h5 class="card-title mb-1"><b>{{this.name}}</b></h5>
+                    <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
+                    <div class=""><a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a></div>
+
+                  </div>
+                </div>
+              </div>
+
+              {{/each}}
+
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        {{/if}}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- fansModal -->
+  <div class="modal fade" id="fansModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">我的球迷</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        {{#if fans}}
+        <div class="modal-body">
+          <div id="carouselFansControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner bg-light">
+              {{#each fans}}
+              <div class="carousel-item {{#ifCond ../fan.id this.id}}active{{/ifCond}}">
+                <div class="ms-2 d-flex flex-column align-items-center" style="width: 18rem; ">
+                  <img class="d-block border border-warning border-4 rounded-3  my-2" src="{{this.image}}" alt="..."
+                    style="width:200px; height:250px;">
+                  <div class="card-body text-center">
+                    <h5 class="card-title mb-1"><b>{{this.name}}</b></h5>
+                    <span class="bg-info badge mb-2">追蹤人數：{{this.followerCount}}</span>
+                    <div class=""><a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a></div>
+
+                  </div>
+                </div>
+              </div>
+
+              {{/each}}
+
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselFansControls"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bg-info" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselFansControls"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon bg-info" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        {{/if}}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

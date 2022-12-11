@@ -1,4 +1,3 @@
-{{!-- <h3 class="text-center mt-3">推薦球員</h3> --}}
 <div class="container-fluid mt-3 d-flex flex-column align-items-center">
     <form class="row g-3" action="/basketball/top-player">
         <div class="col-auto">
@@ -7,14 +6,13 @@
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">搜尋球員</button>
-            {{!-- <a class="btn btn-primary mb-3" href="/basketball/top-player">刷新球員</a> --}}
         </div>
     </form>
-    <div class="d-flex flex-wrap " style="outline: 3px solid tomato; width:920px;">
+    <div class="d-flex  flex-wrap tabindex= 0 " data-bs-spy="scroll" style="outline: 3px solid tomato;" id="top_player">
         {{#each users}}
-        <div class="card mx-2 my-2 border border-3 rounded-3 border-warning" style="width: 18rem;">
+        <div class="card mx-2 my-2 border border-3 rounded-3 border-warning" style="width: 15rem;">
             <div class="text-center"><img src="{{this.image}}" class="card-img-top mt-2" alt="..."
-                    style="height: 200px; width:200px;"></div>
+                    style="height: 200px; width:150px;"></div>
 
             <div class="card-body text-center mx-auto" style="width:200px;">
                 <h3 class="card-title">{{this.name}}</h3>

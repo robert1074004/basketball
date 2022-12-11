@@ -1,4 +1,8 @@
-
+  #container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   #record_panel{
       width:350px;
   }
@@ -10,10 +14,10 @@
   }
   #user_panel{
       width: 250px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-  } 
+      height: 380px;
+      overflow-y: scroll;
+      margin: 2rem 0;
+  }
   #register_panel{
       width: 320px;
   }
@@ -33,18 +37,16 @@
       align-items: center;
   }
   #left_side{
-    display:none;
+    width:250px;
   }
   #img{
     width:250px;
     height:300px;
   }
-  #show{
-    display:inline;
-  }
   .row{
     display: block;
   }
+  /* register class='row' */
   #other_img{
     width:100px;
     height:120px;
@@ -54,7 +56,12 @@
     height: 400px;
     overflow-y: scroll;
   }
-  
+  #top_player{
+    width:260px;
+    height:580px;
+    overflow-y: scroll;
+  }
+  @media screen and (min-width:480px) {#container{display: flex; flex-direction: row; justify-content: space-evenly;}}
   @media screen and (min-width:480px) {#record_panel{width:800px;}} 
   @media screen and (min-width:480px) {#rank_panel{width:1200px;}}
   @media screen and (min-width:480px) {#profile_panel{width:500px;height:500px;}}
@@ -68,12 +75,12 @@
   @media screen and (min-width:480px) {#basketball_logo{display:none;}}
   @media screen and (min-width:480px) {#button_panel{display:flex;justify-content: space-around; flex-direction: row;}}
   @media screen and (min-width:480px) {#img{width:250px; height:300px;}}
-  @media screen and (min-width:480px) {#left_side{width:250px; display:block;}}
-  @media screen and (min-width:480px) {#show{display:none;}}
-  @media screen and (min-width:480px) {#collapseExample{display:none;}} 
+  @media screen and (min-width:480px) {#follow_button{display: none}}
+  @media screen and (min-width:480px) {#top_player{ width:760px;}}
   @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
   @media screen and (max-width:480px) {#rank_table{width:580px;}}
   @media screen and (max-width:480px) {#record_table{width:670px;}} 
   @media screen and (max-width:480px) {#p{margin-left:20px;}}
+  @media screen and (max-width:480px) {#follow{display: none;}}
   
    
