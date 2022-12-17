@@ -25,7 +25,7 @@
         <h5 class="ms-2"><span class="bg-success badge ">位置：{{other_user.position}}</span></h5>
       </div>
     </div>
-    <div id="left_side" class="p-3 mt-4">
+    <div id="left_side" class="p-3 my-4">
       <h3 class="text-center mb-2">生涯比賽數據</h3>
       <div class="record-group">
         <div class="d-flex align-items-center">
@@ -118,7 +118,7 @@
             <div class="carousel-inner bg-light">
               {{#each followings}}
               <div class="carousel-item {{#ifCond ../follow.id this.id}}active{{/ifCond}}">
-                <div class="ms-2 d-flex flex-column align-items-center" style="width: 18rem; ">
+                <div class="ms-3 d-flex flex-column align-items-center" style="width: 18rem; ">
                   <img class="d-block border border-warning border-4 rounded-3  my-2" src="{{this.image}}" alt="..."
                     style="width:200px; height:250px;">
                   <div class="card-body text-center">
@@ -169,7 +169,7 @@
             <div class="carousel-inner bg-light">
               {{#each fans}}
               <div class="carousel-item {{#ifCond ../fan.id this.id}}active{{/ifCond}}">
-                <div class="ms-2 d-flex flex-column align-items-center" style="width: 18rem; ">
+                <div class="ms-3 d-flex flex-column align-items-center" style="width: 18rem; ">
                   <img class="d-block border border-warning border-4 rounded-3  my-2" src="{{this.image}}" alt="..."
                     style="width:200px; height:250px;">
                   <div class="card-body text-center">
