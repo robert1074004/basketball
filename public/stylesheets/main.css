@@ -61,6 +61,9 @@
     width:260px;
     height:580px;
     overflow-y: scroll;
+    display:flex ;
+    flex-direction: column;
+    align-items: center;
   }
   @media screen and (min-width:480px) {#container{display: flex; flex-direction: row; justify-content: space-evenly;}}
   @media screen and (min-width:480px) {#record_panel{width:800px;}} 
@@ -78,7 +81,7 @@
   @media screen and (min-width:480px) {#button_panel{display:flex;justify-content: space-around; flex-direction: row;}}
   @media screen and (min-width:480px) {#img{width:250px; height:300px;}}
   @media screen and (min-width:480px) {#follow_button{display: none}}
-  @media screen and (min-width:480px) {#top_player{ width:760px;}}
+  @media screen and (min-width:480px) {#top_player{ width:760px; display:flex; flex-direction: row ; justify-content: center;}}
   @media screen and (min-width:480px) {#hint{ display:none;}}
   @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
   @media screen and (max-width:480px) {#rank_table{width:580px;}}
