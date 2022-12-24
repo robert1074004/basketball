@@ -14,7 +14,7 @@
   }
   #user_panel{
       width: 250px;
-      height: 380px;
+      height: 400px;
       overflow-y: scroll;
       margin: 2rem 0;
   }
@@ -38,6 +38,7 @@
   }
   #left_side{
     width:250px;
+    margin: 3rem 0;
   }
   #img{
     width:250px;
@@ -68,6 +69,7 @@
   @media screen and (min-width:480px) {#login_panel{width:400px;height:400px;}}
   @media screen and (min-width:480px) {#register_panel{width:700px;}}
   @media screen and (min-width:480px) {#user_panel{width:500px; height:400px;display: flex; flex-direction: row;}}
+  @media screen and (min-width:480px) {#left_side{margin: 1.5rem 0 ;} }
   @media screen and (min-width:480px) {#create_panel{width:700px; height:500px;}}
   @media screen and (min-width:480px) {#edit_panel{width:700px; height:500px;}}  
   @media screen and (min-width:480px) {.row{display:flex;}}
@@ -77,6 +79,7 @@
   @media screen and (min-width:480px) {#img{width:250px; height:300px;}}
   @media screen and (min-width:480px) {#follow_button{display: none}}
   @media screen and (min-width:480px) {#top_player{ width:760px;}}
+  @media screen and (min-width:480px) {#hint{ display:none;}}
   @media screen and (max-width:480px) {#button_edit{margin-bottom:10px;}}
   @media screen and (max-width:480px) {#rank_table{width:580px;}}
   @media screen and (max-width:480px) {#record_table{width:670px;}} 
