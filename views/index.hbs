@@ -16,7 +16,8 @@
 
 
   {{!-- userPanel --}}
-  <div class="tabindex= 0" style=" outline:solid 3px tomato;" id="user_panel" data-bs-spy="scroll">
+  <div  style=" outline:solid 3px tomato;" class="mb-3" >
+      <div class="tabindex= 0"  id="user_panel" data-bs-spy="scroll">
     <div class="text-center" id="right_side">
       <img class="p-3" src="{{other_user.image}}" id="img">
       <h5><b>球員名稱 : {{other_user.name}}</b></h5>
@@ -25,8 +26,7 @@
         <h5 class="ms-2"><span class="bg-success badge ">位置：{{other_user.position}}</span></h5>
       </div>
     </div>
-    <p class="text-center" style="font-size: 14px;" id="hint"><span class="bg-danger badge ">下滑顯示更多資訊</span></p>
-    <div id="left_side" class="p-3 ">
+    <div id="left_side" class="p-3 my-4">
       <h3 class="text-center mb-2">生涯比賽數據</h3>
       <div class="record-group">
         <div class="d-flex align-items-center">
@@ -79,7 +79,8 @@
       </div>
     </div>
   </div>
-
+    <p class="text-center" style="font-size: 14px;" id="hint"><span class="bg-danger badge ">下滑顯示更多資訊</span></p>
+  </div>
   
 
   {{!-- followingsAside --}}
