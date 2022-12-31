@@ -64,14 +64,16 @@
             </div>
             {{/each}}
             {{else}}
-            <span class="bg-danger badge">
-                <h3 class="mb-0">目前無推薦球員</h3>
+            <span class="bg-danger badge mt-3">
+                <h4 class="mb-0">目前無推薦球員</h4>
             </span>
             {{/if}}
         </div>
+        {{#if users}}
          <p class="text-center" style="font-size: 16px;" id="hint"><span class="bg-danger badge ">下滑顯示更多資訊</span></p>
+        {{/if}} 
     </div>
-    
+    {{#if users}}
     <div class="d-flex align-items-center">
         <nav class="mt-3" aria-label="page navigation">
             <ul class="pagination">
@@ -97,4 +99,5 @@
             </ul>
         </nav>
     </div>
+    {{/if}}
 </div>

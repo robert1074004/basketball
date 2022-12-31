@@ -3,6 +3,7 @@
   <aside style=" outline:solid 3px tomato;" id="follow">
     <h5 class="mt-3 mb-0 text-center">你的球迷</h5>
     <aside class=" p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
+      {{#if fans}}
       {{#each fans}}
       <div class="mb-2 text-center border border-3 rounded-3 border-warning " id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
@@ -11,7 +12,15 @@
         <a class="btn btn-primary btn-sm mb-2" href="/basketball/{{this.id}}">view</a>
       </div>
       {{/each}}
+      {{else}}
+      <span class="bg-danger badge mt-3">
+                <h6 class="mb-0 text-center">你目前沒有球迷</h3>
+     </span>
+     {{/if}}
     </aside>
+    {{#if fans}}
+    <p class="text-center" style="font-size: 14px;" ><span class="bg-danger badge ">下滑顯示更多資訊</span></p>
+    {{/if}}
   </aside>
 
 
@@ -86,7 +95,9 @@
   {{!-- followingsAside --}}
   <aside style=" outline:solid 3px tomato;" id="follow">
     <h5 class="mt-3 mb-0 text-center">追蹤球員</h5>
+     
     <aside class=" p-2 tabindex= 0" id="other_users" data-bs-spy="scroll">
+      {{#if followings}}
       {{#each followings}}
       <div class=" mb-2 text-center border border-3 rounded-3 border-warning " id="other_user">
         <p class="mb-0"><b>{{this.name}}</b></p>
@@ -96,7 +107,15 @@
 
       </div>
       {{/each}}
+      {{else}}
+      <span class="bg-danger badge mt-3">
+                <h6 class="mb-0 text-center">目前無追蹤球員</h3>
+     </span>
+     {{/if}}
     </aside>
+    {{#if followings}}
+    <p class="text-center" style="font-size: 14px;" ><span class="bg-danger badge ">下滑顯示更多資訊</span></p>
+    {{/if}}
   </aside>
   <!-- Button trigger followModal -->
   <div id="follow_button">
