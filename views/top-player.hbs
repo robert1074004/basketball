@@ -15,7 +15,7 @@
             {{#each users}}
             <div class="card mx-2 my-3 border border-3 rounded-3 border-warning" style="width: 15rem;">
                 <div class="text-center"><img src="{{this.image}}" class="card-img-top mt-2" alt="..."
-                        style="height: 180px; width:150px;"></div>
+                        style="height: 150px; width:125px;"></div>
 
                 <div class="card-body text-center mx-auto p-2" style="width:180px;">
                     <h4 class="card-title"><b>{{this.name}}</b></h4>
@@ -44,7 +44,7 @@
                             this.latest.to_v}}{{this.latest.to_v}}{{else}}0{{/if}}%</div>
                     </div>
                     <h6 class="mt-2" id="date">比賽日期 : {{this.latest.date}}</h6>
-                    <div class="d-flex justify-content-around my-2" id="span">
+                    <div class="d-flex justify-content-between my-2" id="span">
                         <span class="bg-info badge ">追蹤人數：{{this.followerCount}}</span>
                         <span class="bg-success badge ">位置：{{this.position}}</span>
                     </div>
