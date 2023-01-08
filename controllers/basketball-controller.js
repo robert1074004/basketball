@@ -134,10 +134,6 @@ const basketballController = {
         )
     },
     getPlayer: (req, res, next) => {
-      const DEFAULT_LIMIT = 3
-      const page = Number(req.query.page) || 1
-      const limit = Number(req.query.limit) || DEFAULT_LIMIT
-      const offset = getOffset(limit, page)
       const player = req.query.player?.trim().toLowerCase() || ""
       return User.findAll({ include: [{ model: User, as: 'Followers' }, Record],nest:true})
         .then((users) => {
@@ -154,9 +150,7 @@ const basketballController = {
           }
           all_user = all_user.sort((a,b) => b.comprehensive - a.comprehensive)
           all_user = all_user.filter(user => user.name.toLowerCase().includes(player))
-          const length = all_user.length
-          all_user = all_user.slice(offset, offset+limit)
-          res.render('top-player', { users: all_user, player, pagination: getPagination(limit, page, length)})
+          res.render('top-player', { users: all_user, player})
         })
         .catch(err => next(err))  
     }
