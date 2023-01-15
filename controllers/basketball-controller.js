@@ -97,18 +97,11 @@ const basketballController = {
     },
     getRecord: (req, res, next) => {
       const user_id = Number(req.params.id) || req.user.id
-      const DEFAULT_LIMIT = 5
-      const page = Number(req.query.page) || 1
-      const limit = Number(req.query.limit) || DEFAULT_LIMIT
-      const offset = getOffset(limit, page)
       return User.findByPk(user_id, {include: Record, nest: true, order:[[Record, 'id', 'DESC']] })
         .then(user => {
           if (!user) throw new Error("This user didn't exist!")
-          const other_user = {...user.toJSON(),
-            Records: user.toJSON().Records.slice(offset, offset+limit),
-            recordCount: user.toJSON().Records.length,
-          }
-          res.render('record',{records: other_user.Records, pagination: getPagination(limit, page, other_user.recordCount), other_user} )
+          const other_user = user.toJSON()
+          res.render('record',{records: other_user.Records,  other_user} )
         })
         .catch(err => next(err))
     },
@@ -133,7 +126,7 @@ const basketballController = {
         }  
         )
     },
-    getPlayer: (req, res, next) => {
+    getPlayer: (req, res, next) => { 
       const player = req.query.player?.trim().toLowerCase() || ""
       return User.findAll({ include: [{ model: User, as: 'Followers' }, Record],nest:true})
         .then((users) => {
