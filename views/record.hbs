@@ -12,8 +12,8 @@
                             <th scope="col">投籃出手</th>
                             <th scope="col">罰球出手</th>
                             <th scope="col">失誤</th>
-                            <th scope="col">有效命中率</th>
-                            <th scope="col">真實命中率</th>
+                            <th scope="col" >有效命中率</th>
+                            <th scope="col" >真實命中率</th>
                             <th scope="col">失誤率</th>
                             {{#ifCond ./user.id ./other_user.id}}
                             <th scope="col" style="width: 150px;"></th>
@@ -31,8 +31,8 @@
                             <td>{{this.FGA}}</td>
                             <td>{{this.FTA}}</td>
                             <td>{{this.TOV}}</td>
-                            <td>{{this.efg}}%</td>
-                            <td>{{this.ts}}%</td>
+                            <td >{{this.efg}}%</td>
+                            <td >{{this.ts}}%</td>
                             <td>{{this.to_v}}%</td>
                             {{#ifCond ../user.id ../other_user.id}}
                             <td id="button_panel" style="width:150px;">

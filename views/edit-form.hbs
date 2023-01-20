@@ -1,7 +1,10 @@
 <div class="container-fluid mt-5">
     <div class="mx-auto" style="border:3px solid tomato;" id="edit_panel">
-        <form action="/basketball/record/{{record.id}}?_method=PUT" method="POST" class="p-3">
-            {{>form}}
-        </form>
+        <h4 class="text-center my-3">修改單場比賽數據</h4>
+        <div style="overflow:auto; height:450px;">
+            <form action="/basketball/record/{{record.id}}?_method=PUT" method="POST" class="p-3">
+                {{>form}}
+            </form>
+        </div>
     </div>
 </div>

@@ -1,47 +1,54 @@
 <div class="container-fluid mt-5">
-    <div class="mx-auto" style="border : tomato solid 3px;" id = "register_panel">
-        <form action="/register" method="POST" class="p-3 pb-4" enctype="multipart/form-data">
-            <h1 class="text-center">Register</h1>
-             {{> messages}}
-            <p>* 為必填欄位</p>
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="name" class="form-label">* Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="name" name="name" required>
+    <div class="mx-auto" style="border : tomato solid 3px;" id="register_panel">
+        <h1 class="text-center my-2">Register</h1>
+        <div style="overflow:auto;" id="register_form">
+            <form action="/register" method="POST" class="p-3 pb-4" enctype="multipart/form-data">
+                {{> messages}}
+                <p>* 為必填欄位</p>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="name" class="form-label">* Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="name" name="name" required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="email" class="form-label">* email</label>
+                        <input type="email" class="form-control" id="email" placeholder="email" name="email" required>
+                    </div>
                 </div>
-                <div class="col mb-3">
-                    <label for="email" class="form-label">* email</label>
-                    <input type="email" class="form-control" id="email" placeholder="email" name="email" required>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="password" class="form-label">* password</label>
+                        <input type="password" class="form-control" id="password" placeholder="password" name="password"
+                            required>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="confirmPassword" class="form-label">* Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="confirmPassword"
+                            name="confirmPassword" required>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="password" class="form-label">* password</label>
-                    <input type="password" class="form-control" id="password" placeholder="password" name="password" required>
-                </div>
-                <div class="col mb-3">
-                    <label for="confirmPassword" class="form-label">* Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="confirmPassword"
-                        name="confirmPassword" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="position" class="form-label">* 位置</label>
-                    <select class="form-select" aria-label="Default select example" name="position" required>
-                        <option value="後衛" selected>後衛</option>
-                        <option value="前鋒">前鋒</option>
-                        <option value="中鋒">中鋒</option>
-                    </select>
-                </div>
-                <div class="col mb-3">
-                    <label for="image" class="form-label">個人照片  (參考尺寸250x300)</label>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="position" class="form-label">* 位置</label>
+                        <select class="form-select" aria-label="Default select example" name="position" required>
+                            <option value="後衛" selected>後衛</option>
+                            <option value="前鋒">前鋒</option>
+                            <option value="中鋒">中鋒</option>
+                        </select>
+                    </div>
+                    <div class="col mb-3">
+                        <label for="image" class="form-label">個人照片 (參考尺寸250x300)</label>
                         <input class="form-control" type="file" class="form-control-file" id="image" name="image">
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-end"><button class="btn btn-primary" type="submit">register</button><p class="lead mb-0 me-2" id = "p">Have an Account? <a href="/login">Login</a></p></div>
-            
-        </form>
-        
+                <div class="d-flex justify-content-between align-items-end"><button class="btn btn-primary"
+                        type="submit">register</button>
+                    <p class="lead mb-0 me-2" id="p">Have an Account? <a href="/login">Login</a></p>
+                </div>
+
+            </form>
+        </div>
+
+
     </div>
 </div>

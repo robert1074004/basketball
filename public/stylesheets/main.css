@@ -20,6 +20,9 @@
   #register_panel{
       width: 320px;
   }
+  #register_form{
+    height:450px;
+  }
   #login_panel{
       width:300px;
       height:400px;
@@ -60,7 +63,7 @@
   }
   #top_player{
     width:260px;
-    height:510px;
+    height:490px;
     overflow-y: auto;
     display:flex ;
     flex-direction: column;
@@ -76,7 +79,7 @@
   }
   table {
     table-layout: fixed;
-    width:1160px;
+    width:1165px;
   }
   td, th{
     border-right:1px solid gray;
@@ -97,15 +100,16 @@
 
     z-index:2;
    
-   background-color: rgb(251, 221, 210);
+   background-color: rgb(255, 221, 210);
    
    }
   @media screen and (min-width:480px) {#container{display: flex; flex-direction: row; justify-content: space-evenly;}}
-  @media screen and (min-width:480px) {#record_panel{width:1160px;}} 
+  @media screen and (min-width:480px) {#record_panel{width:1165px;}} 
   @media screen and (min-width:480px) {#rank_panel{width:1200px;}}
   @media screen and (min-width:480px) {#profile_panel{width:500px;height:500px;}}
   @media screen and (min-width:480px) {#login_panel{width:400px;height:400px;}}
   @media screen and (min-width:480px) {#register_panel{width:700px;}}
+  @media screen and (min-width:480px) {#register_form{height:375px;}}
   @media screen and (min-width:480px) {#user_panel{width:500px; height:400px;display: flex; flex-direction: row;}}
   @media screen and (min-width:480px) {#create_panel{width:700px; height:500px;}}
   @media screen and (min-width:480px) {#edit_panel{width:700px; height:500px;}}  

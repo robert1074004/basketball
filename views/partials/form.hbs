@@ -1,38 +1,43 @@
-<h4 class="text-center my-3">輸入單場比賽數據</h4>
-            {{> messages}}
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="PTS" class="form-label">得分</label>
-                    <input type="number" class="form-control" id="PTS" placeholder="points" name="PTS" min="0" value="{{record.PTS}}" required>
-                </div>
-                <div class="col mb-3">
-                    <label for="FGA" class="form-label">投籃出手次數 <small>(三分出手次數 + 二分出手次數)</small> </label>
-                    <input type="number" class="form-control" id="FGA" name="FGA" min="0" placeholder="投籃出手次數" value="{{record.FGA}}"required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="FTA" class="form-label">罰球出手次數</label>
-                    <input type="number" class="form-control" id="FTA" placeholder="罰球出手次數" name="FTA" min="0" value="{{record.FTA}}"required>
-                </div>
-                <div class="col mb-3">
-                    <label for="FGM" class="form-label">投籃命中<small>(三分命中 + 二分命中)</small></label>
-                    <input type="number" class="form-control" id="FGM" placeholder="投籃命中" name="FGM" min="0" value="{{record.FGM}}"required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="3PM" class="form-label">三分命中</label>
-                    <input type="number" class="form-control" id="3PM" placeholder="三分命中" name="THREE_PM" min="0" value="{{record.THREE_PM}}"required>
-                </div>
-                <div class="col mb-3">
-                    <label for="TOV" class="form-label">失誤次數</label>
-                    <input type="number" class="form-control" id="TOV" placeholder="失誤次數" name="TOV" min="0" value="{{record.TOV}}"required>
-                </div>
-            </div>
-            <div class="mb-3"><label for="date" class="form-label">比賽日期</label>
-                <input type="date" class="form-control" id="date" name="date" min="0" value="{{record.date}}"required>
-            </div>
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary ">send</button>
-            </div>
+{{> messages}}
+<div class="row">
+    <div class="col mb-3">
+        <label for="PTS" class="form-label">得分</label>
+        <input type="number" class="form-control" id="PTS" placeholder="points" name="PTS" min="0"
+            value="{{record.PTS}}" required>
+    </div>
+    <div class="col mb-3">
+        <label for="FGA" class="form-label">投籃出手 <small>(三分出手 + 二分出手)</small> </label>
+        <input type="number" class="form-control" id="FGA" name="FGA" min="0" placeholder="投籃出手" value="{{record.FGA}}"
+            required>
+    </div>
+</div>
+<div class="row">
+    <div class="col mb-3">
+        <label for="FTA" class="form-label">罰球出手</label>
+        <input type="number" class="form-control" id="FTA" placeholder="罰球出手" name="FTA" min="0" value="{{record.FTA}}"
+            required>
+    </div>
+    <div class="col mb-3">
+        <label for="FGM" class="form-label">投籃命中 <small>(三分命中 + 二分命中)</small></label>
+        <input type="number" class="form-control" id="FGM" placeholder="投籃命中" name="FGM" min="0" value="{{record.FGM}}"
+            required>
+    </div>
+</div>
+<div class="row">
+    <div class="col mb-3">
+        <label for="3PM" class="form-label">三分命中</label>
+        <input type="number" class="form-control" id="3PM" placeholder="三分命中" name="THREE_PM" min="0"
+            value="{{record.THREE_PM}}" required>
+    </div>
+    <div class="col mb-3">
+        <label for="TOV" class="form-label">失誤</label>
+        <input type="number" class="form-control" id="TOV" placeholder="失誤" name="TOV" min="0" value="{{record.TOV}}"
+            required>
+    </div>
+</div>
+<div class="mb-3"><label for="date" class="form-label">比賽日期</label>
+    <input type="date" class="form-control" id="date" name="date" min="0" value="{{record.date}}" required>
+</div>
+<div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary ">send</button>
+</div>
