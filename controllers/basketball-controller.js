@@ -106,23 +106,19 @@ const basketballController = {
         .catch(err => next(err))
     },
     getRank: (req, res) => {
-      const DEFAULT_LIMIT = 10
       const sorts = ['games','efg','ts','tov']
       const orders = ['DESC','ASC']
       const teams = ['臺北富邦勇士','桃園領航猿','新竹街口攻城獅','福爾摩沙台新夢想家','高雄鋼鐵人','新北國王']
       const sort = sorts.find(sort => sort === req.query.sort) || 'id'
       const order = orders.find(order => order === req.query.order) || 'ASC'
       const team = teams.find(team => team === req.query.team ) || ''
-      const page = Number(req.query.page) || 1
-      const limit =  DEFAULT_LIMIT
-      const offset = getOffset(limit, page)
-      return PLG.findAndCountAll({ raw:true, nest:true, limit, offset, where: {...team ? {team} : {}}, order: [[sort, order]]})
+      return PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}}, order: [[sort, order]]})
         .then(plg => {
-          Plg = plg.rows.map(plgs => ({
+          Plg = plg.map(plgs => ({
             ...plgs,
-            index: offset + plg.rows.indexOf(plgs) + 1
+            index: plg.indexOf(plgs) + 1
           }))
-          res.render('rank', {plg: Plg, team, pagination: getPagination(limit, page, plg.count), sort, order})
+          res.render('rank', {plg: Plg, team, sort, order})
         }  
         )
     },

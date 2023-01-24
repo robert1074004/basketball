@@ -77,6 +77,11 @@
     width:100%;
     height:500px;
   }
+  #rank_table {
+    overflow: auto;
+    width:100%;
+    height:400px;
+  }
   table {
     table-layout: fixed;
     width:1165px;
@@ -121,7 +126,6 @@
   @media screen and (min-width:480px) {#follow_button{display: none}}
   @media screen and (min-width:480px) {#top_player{ width:850px; height: 520px; display:flex; flex-direction: row ; flex-wrap: wrap; overflow-y: auto; justify-content: center;}}
   @media screen and (min-width:480px) {#hint{ display:none;}}
-  @media screen and (max-width:480px) {#rank_table{width:580px;}}
   @media screen and (max-width:480px) {#p{margin-left:20px;}}
   @media screen and (max-width:480px) {#follow{display: none;}}
   @media screen and (max-width:480px) {#date{font-size: 14px;}}
