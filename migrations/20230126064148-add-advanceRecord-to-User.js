@@ -9,9 +9,10 @@ module.exports = {
       queryInterface.addColumn('Users', 'FGM', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
       queryInterface.addColumn('Users', 'THREE_PM', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
       queryInterface.addColumn('Users', 'TOV', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'efg', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'ts', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'to_v', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t})])
+      queryInterface.addColumn('Users', 'EFG', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'TS', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'TO_V', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'game', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t})])
     })
   },
 
@@ -23,9 +24,10 @@ module.exports = {
       queryInterface.removeColumn('Users', 'FGM',  {transaction: t}),
       queryInterface.removeColumn('Users', 'THREE_PM',  {transaction: t}),
       queryInterface.removeColumn('Users', 'TOV', {transaction: t}),
-      queryInterface.removeColumn('Users', 'efg', {transaction: t}),
-      queryInterface.removeColumn('Users', 'ts',  {transaction: t}),
-      queryInterface.removeColumn('Users', 'to_v', {transaction: t})])
+      queryInterface.removeColumn('Users', 'EFG', {transaction: t}),
+      queryInterface.removeColumn('Users', 'TS',  {transaction: t}),
+      queryInterface.removeColumn('Users', 'TO_V', {transaction: t}),
+      queryInterface.removeColumn('Users', 'game', {transaction: t})])
     })
   }
 };

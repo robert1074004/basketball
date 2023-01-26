@@ -13,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     FGM: DataTypes.INTEGER,
     THREE_PM: DataTypes.INTEGER,
     TOV: DataTypes.INTEGER,
-    efg: DataTypes.INTEGER,
-    ts: DataTypes.INTEGER,
-    to_v: DataTypes.INTEGER
+    EFG: DataTypes.INTEGER,
+    TS: DataTypes.INTEGER,
+    TO_V: DataTypes.INTEGER,
+    game:DataTypes.INTEGER
   }, {});
   User.associate = function(models) {
     User.hasMany(models.Record)
