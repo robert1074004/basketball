@@ -47,7 +47,7 @@ const basketballController = {
           const EFG = advanceData.getEfg(FGM,THREE_PM,FGA)
           const TS = advanceData.getTs(PTS,FTA,FGA)
           const TO_V = advanceData.getTov(TOV,FTA,FGA)
-          res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans,follow,fan})
+          res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans,follow,fan}) 
         })
         .catch(err => next(err))
     },

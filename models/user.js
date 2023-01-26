@@ -6,7 +6,16 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     position: DataTypes.STRING,
     is_admin: DataTypes.BOOLEAN,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
+    PTS: DataTypes.INTEGER,
+    FGA: DataTypes.INTEGER,
+    FTA: DataTypes.INTEGER,
+    FGM: DataTypes.INTEGER,
+    THREE_PM: DataTypes.INTEGER,
+    TOV: DataTypes.INTEGER,
+    efg: DataTypes.INTEGER,
+    ts: DataTypes.INTEGER,
+    to_v: DataTypes.INTEGER
   }, {});
   User.associate = function(models) {
     User.hasMany(models.Record)
