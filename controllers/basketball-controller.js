@@ -123,6 +123,20 @@ const basketballController = {
         }  
         )
     },
+    getUserRank: (req, res, next) => {
+      const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
+      const orders = ['DESC','ASC']
+      const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
+      const order = orders.find(order => order === req.query.order) || 'DESC'
+      return User.findAll({raw: true, nest: true, order: [[sort, order]]})
+        .then(users => {
+          users = users.map(user => ({
+            ...user,
+            index: users.indexOf(user) + 1
+          }))
+          res.render('user-rank', {users})
+        })
+    },
     getPlayer: (req, res, next) => { 
       const player = req.query.player?.trim().toLowerCase() || ""
       return User.findAll({ include: [{ model: User, as: 'Followers' }, Record],nest:true})
