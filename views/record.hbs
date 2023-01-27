@@ -1,83 +1,84 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" id="record_panel">
         <h3 class="text-center my-4">{{other_user.name}}的比賽數據</h3>
-            <div class=" border border-primary border-3" id = "record_table">
-                <table class="table table-hover mb-0 " >
-                    <thead class="table-primary">
-                        <tr>
-                            <th scope="col">日期</th>
-                            <th scope="col">得分</th>
-                            <th scope="col">投籃命中</th>
-                            <th scope="col">三分命中</th>
-                            <th scope="col">投籃出手</th>
-                            <th scope="col">罰球出手</th>
-                            <th scope="col">失誤</th>
-                            <th scope="col" >有效命中率</th>
-                            <th scope="col" >真實命中率</th>
-                            <th scope="col">失誤率</th>
-                            <th scope="col" style="width: 150px;">{{#ifCond ./user.id ./other_user.id}}
-                             {{else}} 出賽場數 {{/ifCond}}</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each records}}
-                        <tr>
-                            <td scope="row" ><b style="font-size: 14px;">{{this.date}}</b></td>
-                            <td>{{this.PTS}}</td>
-                            <td>{{this.FGM}}</td>
-                            <td>{{this.THREE_PM}}</td>
-                            <td>{{this.FGA}}</td>
-                            <td>{{this.FTA}}</td>
-                            <td>{{this.TOV}}</td>
-                            <td >{{this.efg}}%</td>
-                            <td >{{this.ts}}%</td>
-                            <td>{{this.to_v}}%</td>
-                            <td id="button_panel" style="width:150px;">
-                                {{#ifCond ../user.id ../other_user.id}}
-                                <a class="btn btn-primary btn-sm" href="/basketball/form/edit/{{this.id}}"
-                                    id="button_edit">edit</a>
-                                <form action="/basketball/record/{{this.id}}?_method=DELETE" method="POST">
-                                    <button class="btn btn-primary btn-sm" type="submit"
-                                        onclick="return confirm(`確定要刪除此數據?`);">delete</button>
-                                </form>
-                                {{else}}
-                                 1
-                                {{/ifCond}}
-                            </td>                         
-                        </tr>
-                        {{/each}}
-                        <tr style=" position:sticky; bottom:0; z-index:3; background-color: white;">
-                            <td scope="row" ><b style="font-size: 18px;">平均數據</b></td>
-                            <td><b style="font-size: 20px;">{{other_user.PTS}}</b></td>
-                            <td><b style="font-size: 20px;">{{other_user.FGM}}</b></td>
-                            <td><b style="font-size: 20px;">{{other_user.THREE_PM}}</b></td>
-                            <td><b style="font-size: 20px;">{{other_user.FGA}}</b></td>
-                            <td><b style="font-size: 20px;">{{other_user.FTA}}</b></td>
-                            <td><b style="font-size: 20px;">{{other_user.TOV}}</b></td>
-                            <td ><b style="font-size: 20px;">{{other_user.EFG}}%</b></td>
-                            <td ><b style="font-size: 20px;">{{other_user.TS}}%</b></td>
-                            <td><b style="font-size: 20px;">{{other_user.TO_V}}%</b></td>
-                            {{#ifCond user.id other_user.id}}
-                            <td  style="width: 150px; ">
-                                出賽場數: <b style="font-size: 20px;">{{other_user.game}}</b>
-                            </td>
-                            {{else}}
-                            <td  style="width: 150px; display:flex; justify-content:center;">
-                                <b style="font-size: 20px;">{{other_user.game}}</b>
-                            </td>
-                            {{/ifCond}}
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class=" border border-primary border-3" id="record_table">
+            <table class="table table-hover mb-0 ">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">日期</th>
+                        <th scope="col">得分</th>
+                        <th scope="col">投籃命中</th>
+                        <th scope="col">三分命中</th>
+                        <th scope="col">投籃出手</th>
+                        <th scope="col">罰球出手</th>
+                        <th scope="col">失誤</th>
+                        <th scope="col">有效命中率</th>
+                        <th scope="col">真實命中率</th>
+                        <th scope="col">失誤率</th>
+                        <th scope="col" style="width: 150px;">{{#ifCond ./user.id ./other_user.id}}
+                            {{else}} 出賽場數 {{/ifCond}}</th>
 
-        
-            {{#ifCond user.id other_user.id}}
-            <a class="btn btn-primary btn-sm mt-3 " href="/basketball/form">add record</a>
-            {{else}}
-            <a class="btn btn-primary btn-sm mt-3 " href="javascript:history.back(-1)">back</a>
-            {{/ifCond}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each records}}
+                    <tr>
+                        <td scope="row"><b style="font-size: 14px;">{{this.date}}</b></td>
+                        <td>{{this.PTS}}</td>
+                        <td>{{this.FGM}}</td>
+                        <td>{{this.THREE_PM}}</td>
+                        <td>{{this.FGA}}</td>
+                        <td>{{this.FTA}}</td>
+                        <td>{{this.TOV}}</td>
+                        <td>{{this.efg}}%</td>
+                        <td>{{this.ts}}%</td>
+                        <td>{{this.to_v}}%</td>
+                        {{#ifCond ../user.id ../other_user.id}}
+                        <td id="button_panel" style="width:150px;">
+
+                            <a class="btn btn-primary btn-sm" href="/basketball/form/edit/{{this.id}}"
+                                id="button_edit">edit</a>
+                            <form action="/basketball/record/{{this.id}}?_method=DELETE" method="POST">
+                                <button class="btn btn-primary btn-sm" type="submit"
+                                    onclick="return confirm(`確定要刪除此數據?`);">delete</button>
+                            </form>
+                        </td>
+                        {{else}}
+                        <td style="width: 150px; display:flex; justify-content:start;">1</td>
+                        {{/ifCond}}
+                    </tr>
+                    {{/each}}
+                    <tr style=" position:sticky; bottom:0; z-index:3; background-color: white;">
+                        <td scope="row"><b style="font-size: 18px;">平均數據</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.PTS}}</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.FGM}}</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.THREE_PM}}</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.FGA}}</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.FTA}}</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.TOV}}</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.EFG}}%</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.TS}}%</b></td>
+                        <td><b style="font-size: 20px;">{{other_user.TO_V}}%</b></td>
+                        {{#ifCond user.id other_user.id}}
+                        <td style="width: 150px; ">
+                            出賽場數: <b style="font-size: 20px;">{{other_user.game}}</b>
+                        </td>
+                        {{else}}
+                        <td style="width: 150px; display:flex; justify-content:start;">
+                            <b style="font-size: 20px;">{{other_user.game}}</b>
+                        </td>
+                        {{/ifCond}}
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+
+        {{#ifCond user.id other_user.id}}
+        <a class="btn btn-primary btn-sm mt-3 " href="/basketball/form">add record</a>
+        {{else}}
+        <a class="btn btn-primary btn-sm mt-3 " href="javascript:history.back(-1)">back</a>
+        {{/ifCond}}
     </div>
+</div>
 </div>

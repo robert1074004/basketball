@@ -109,7 +109,8 @@
    
    }
   @media screen and (min-width:480px) {#container{display: flex; flex-direction: row; justify-content: space-evenly;}}
-  @media screen and (min-width:480px) {#record_panel{width:1165px;}} 
+  @media screen and (min-width:480px) {#record_panel{width:1165px;}}
+  @media screen and (min-width:480px) {#record_table{max-height:480px;}} 
   @media screen and (min-width:480px) {#rank_panel{width:1200px;}}
   @media screen and (min-width:480px) {#profile_panel{width:500px;height:500px;}}
   @media screen and (min-width:480px) {#login_panel{width:400px;height:400px;}}
