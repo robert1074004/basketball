@@ -1,61 +1,40 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" id="rank_panel">
-        <h3 class="text-center my-2">數據排行榜 (PLG例行賽)</h3>
-        <h6 class="ms-2 my-3">* 此排行榜只紀錄出賽至少20場的球員</h6>
-        <nav class="navbar navbar-expand-lg navbar-light my-3" style="background-color: #e3f2fd;">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center ">
-                    <i class="fa-solid fa-basketball fa-lg" id="basketball_logo"></i>
-                    <a class="navbar-brand ms-2" id="team_type">{{#ifCond team ""}}球隊分類{{else}}{{team}}{{/ifCond}}</a>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav2"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarNav2">
-                    <ul class="navbar-nav  mb-1 d-flex justify-content-start  navbar-nav-scroll" style="--bs-scroll-height: 200px;">
-                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                排列方式
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="?sort=games&order=DESC&team={{team}}">出賽場數</a></li>
-                                <li><a class="dropdown-item" href="?sort=efg&order=DESC&team={{team}}">有效命中率</a></li>
-                                <li><a class="dropdown-item" href="?sort=ts&order=DESC&team={{team}}">真實命中率</a></li>
-                                <li><a class="dropdown-item" href="?sort=tov&order=ASC&team={{team}}">失誤率</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#ifCond team ""}}active{{/ifCond}} " aria-current="page"
-                                href="?sort=efg&order=DESC&team=">全部</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#ifCond team " 臺北富邦勇士"}}active{{/ifCond}}"
-                                href="?team=臺北富邦勇士">臺北富邦勇士</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#ifCond team " 桃園領航猿"}}active{{/ifCond}}" href="?team=桃園領航猿">桃園領航猿</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#ifCond team " 新竹街口攻城獅"}}active{{/ifCond}}"
-                                href="?team=新竹街口攻城獅">新竹街口攻城獅</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#ifCond team " 福爾摩沙台新夢想家"}}active{{/ifCond}}"
-                                href="?team=福爾摩沙台新夢想家">福爾摩沙台新夢想家</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#ifCond team " 高雄鋼鐵人"}}active{{/ifCond}}" href="?team=高雄鋼鐵人">高雄鋼鐵人</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#ifCond team " 新北國王"}}active{{/ifCond}}" href="?team=新北國王">新北國王</a>
-                        </li>
-                       
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <h3 class="text-center my-2">數據排行榜 (PLG例行賽 | 21-22)</h3>
+         <p class="ms-2 my-3" >* 此排行榜只紀錄出賽至少20場的球員</p>
+        <div class="dropdown mb-4 " >
+            <a class="btn btn-primary  dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                 {{#ifCond sort "PTS"}}排序方式{{else}}{{sort}}{{/ifCond}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" >
+                <li><a class="dropdown-item" href="?sort=PTS&order=DESC&team={{team}}" >得分</a></li>
+                <li><a class="dropdown-item" href="?sort=FGM&order=DESC&team={{team}}">投籃命中</a></li>
+                <li><a class="dropdown-item" href="?sort=THREE_PM&order=DESC&team={{team}}">三分命中</a></li>
+                <li><a class="dropdown-item" href="?sort=FGA&order=DESC&team={{team}}">投籃出手</a></li>
+                <li><a class="dropdown-item" href="?sort=FTA&order=DESC&team={{team}}">罰球出手</a></li>
+                <li><a class="dropdown-item" href="?sort=TOV&order=ASC&team={{team}}">失誤</a></li>
+                <li><a class="dropdown-item" href="?sort=EFG&order=DESC&team={{team}}">有效命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TS&order=DESC&team={{team}}">真實命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TO_V&order=ASC&team={{team}}">失誤率</a></li>
+                <li><a class="dropdown-item" href="?sort=game&order=DESC&team={{team}}">出賽場數</a></li>
+            </ul>
+
+            <a class="btn btn-primary  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{#ifCond team ""}}球隊分類{{else}}{{team}}{{/ifCond}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" >
+                <li><a class="dropdown-item" href="?team=" >全部</a></li>
+                <li><a class="dropdown-item" href="?team=臺北富邦勇士">臺北富邦勇士</a></li>
+                <li><a class="dropdown-item" href="?team=桃園領航猿">桃園領航猿</a></li>
+                <li><a class="dropdown-item" href="?team=新竹街口攻城獅">新竹街口攻城獅</a></li>
+                <li><a class="dropdown-item" href="?team=福爾摩沙台新夢想家">福爾摩沙台新夢想家</a></li>
+                <li><a class="dropdown-item" href="?team=高雄鋼鐵人">高雄鋼鐵人</a></li>
+                <li><a class="dropdown-item" href="?team=新北國王">新北國王</a></li>
+            </ul>  
+        </div>
+       
         <div class=" border border-primary border-3" id="rank_table">
             <table class="table table-hover mb-0">
                 <thead class="table-primary">
@@ -63,10 +42,16 @@
                         <th scope="col">排名</th>
                         <th scope="col" style="position: sticky;left:0;z-index: 3; background-color: rgb(255, 221, 210);">球員</th>
                         <th scope="col" style="width: 170px;">隊伍</th>
-                        <th scope="col">出賽場數</th>
+                        <th scope="col">得分</th>
+                        <th scope="col">投籃命中</th>
+                        <th scope="col">三分命中</th>
+                        <th scope="col">投籃出手</th>
+                        <th scope="col">罰球出手</th>
+                        <th scope="col">失誤</th>
                         <th scope="col">有效命中率</th>
                         <th scope="col">真實命中率</th>
                         <th scope="col">失誤率</th>
+                        <th scope="col">出賽場數</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,10 +60,16 @@
                         <td scope="row" style="font-size:20px;">{{this.index}}</td>
                         <td style=" position:sticky; left:0; z-index:1; background-color: white;">{{this.name}}</td>
                         <td>{{this.team}}</td>
-                        <td>{{this.games}}</td>
-                        <td>{{this.efg}}%</td>
-                        <td>{{this.ts}}%</td>
-                        <td>{{this.tov}}%</td>
+                        <td>{{this.PTS}}</td>
+                        <td>{{this.FGM}}</td>
+                        <td>{{this.THREE_PM}}</td>
+                        <td>{{this.FGA}}</td>
+                        <td>{{this.FTA}}</td>
+                        <td>{{this.TOV}}</td>
+                        <td>{{this.EFG}}%</td>
+                        <td>{{this.TS}}%</td>
+                        <td>{{this.TO_V}}%</td>
+                        <td>{{this.game}}</td>
                     </tr>
                     {{/each}}
 

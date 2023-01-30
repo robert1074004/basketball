@@ -16,21 +16,45 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      games: {
+      game: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      efg: {
+      PTS: {
         allowNull: false,
-        type: Sequelize.FLOAT
+        type: Sequelize.INTEGER
       },
-      ts: {
+      FGA: {
         allowNull: false,
-        type: Sequelize.FLOAT
+        type: Sequelize.INTEGER
       },
-      tov: {
+      FTA: {
         allowNull: false,
-        type: Sequelize.FLOAT
+        type: Sequelize.INTEGER
+      },
+      FGM: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      THREE_PM: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      TOV: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      EFG: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      TS: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      TO_V: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
