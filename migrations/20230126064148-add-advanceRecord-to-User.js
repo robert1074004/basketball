@@ -3,12 +3,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.sequelize.transaction(t => {
-      return Promise.all([queryInterface.addColumn('Users', 'PTS', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'FGA', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'FTA', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'FGM', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'THREE_PM', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
-      queryInterface.addColumn('Users', 'TOV', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
+      return Promise.all([queryInterface.addColumn('Users', 'PTS', {type: Sequelize.DataTypes.FLOAT,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'FGA', {type: Sequelize.DataTypes.FLOAT,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'FTA', {type: Sequelize.DataTypes.FLOAT,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'FGM', {type: Sequelize.DataTypes.FLOAT,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'THREE_PM', {type: Sequelize.DataTypes.FLOAT,defaultValue:0}, {transaction: t}),
+      queryInterface.addColumn('Users', 'TOV', {type: Sequelize.DataTypes.FLOAT,defaultValue:0}, {transaction: t}),
       queryInterface.addColumn('Users', 'EFG', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
       queryInterface.addColumn('Users', 'TS', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
       queryInterface.addColumn('Users', 'TO_V', {type: Sequelize.DataTypes.INTEGER,defaultValue:0}, {transaction: t}),
