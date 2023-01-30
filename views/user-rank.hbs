@@ -4,19 +4,19 @@
         <div class="dropdown mb-4">
             <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                排序方式
+               {{#ifCond sort "PTS"}}排序方式{{else}}{{sort}}{{/ifCond}}
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" >
-                <li><a class="dropdown-item" href="?sort=PTS&order=DESC" >得分</a></li>
-                <li><a class="dropdown-item" href="?sort=FGM&order=DESC">投籃命中</a></li>
-                <li><a class="dropdown-item" href="?sort=THREE_PM&order=DESC">三分命中</a></li>
-                <li><a class="dropdown-item" href="?sort=FGA&order=DESC">投籃出手</a></li>
-                <li><a class="dropdown-item" href="?sort=FTA&order=DESC">罰球出手</a></li>
-                <li><a class="dropdown-item" href="?sort=TOV&order=ASC">失誤</a></li>
-                <li><a class="dropdown-item" href="?sort=EFG&order=DESC">有效命中率</a></li>
-                <li><a class="dropdown-item" href="?sort=TS&order=DESC">真實命中率</a></li>
-                <li><a class="dropdown-item" href="?sort=TO_V&order=ASC">失誤率</a></li>
-                <li><a class="dropdown-item" href="?sort=game&order=DESC">出賽場數</a></li>
+                <li><a class="dropdown-item" href="?sort=PTS" >得分</a></li>
+                <li><a class="dropdown-item" href="?sort=FGM">投籃命中</a></li>
+                <li><a class="dropdown-item" href="?sort=THREE_PM">三分命中</a></li>
+                <li><a class="dropdown-item" href="?sort=FGA">投籃出手</a></li>
+                <li><a class="dropdown-item" href="?sort=FTA">罰球出手</a></li>
+                <li><a class="dropdown-item" href="?sort=TOV">失誤</a></li>
+                <li><a class="dropdown-item" href="?sort=EFG">有效命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TS">真實命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TO_V">失誤率</a></li>
+                <li><a class="dropdown-item" href="?sort=game">出賽場數</a></li>
             </ul>
         </div>
         <div class=" border border-primary border-3" id="rank_table">

@@ -114,33 +114,29 @@ const basketballController = {
     },
     getRank: (req, res) => {
       const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
-      const orders = ['DESC','ASC']
       const teams = ['臺北富邦勇士','桃園領航猿','新竹街口攻城獅','福爾摩沙台新夢想家','高雄鋼鐵人','新北國王']
       const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
-      const order = orders.find(order => order === req.query.order) || 'DESC'
       const team = teams.find(team => team === req.query.team ) || ''
-      return PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}}, order: [[sort, order]]})
+      return PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}}, order: [[sort, 'DESC']]})
         .then(plg => {
           Plg = plg.map(plgs => ({
             ...plgs,
             index: plg.indexOf(plgs) + 1
           }))
-          res.render('rank', {plg: Plg, team, sort, order})
+          res.render('rank', { plg: Plg, team, sort })
         }  
         )
     },
     getUserRank: (req, res, next) => {
       const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
-      const orders = ['DESC','ASC']
       const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
-      const order = orders.find(order => order === req.query.order) || 'DESC'
-      return User.findAll({raw: true, nest: true, order: [[sort, order]]})
+      return User.findAll({raw: true, nest: true, order: [[sort, 'DESC']]})
         .then(users => {
           users = users.map(user => ({
             ...user,
             index: users.indexOf(user) + 1
           }))
-          res.render('user-rank', {users})
+          res.render('user-rank', {users, sort})
         })
     },
     getPlayer: (req, res, next) => { 
