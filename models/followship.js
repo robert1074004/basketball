@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     underscored: true,
   });
-  Followship.associate = function(models) {
+  Followship.associate = function() {
     // associations can be defined here
   };
   return Followship;

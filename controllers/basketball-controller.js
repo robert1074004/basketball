@@ -1,6 +1,5 @@
 const { Record } = require('../models')
 const { PLG, User } = require('../models')
-const { getOffset, getPagination } = require('../helpers/pagination-helper')
 const advanceData = require('../helpers/record-helpers')
 const basketballController = {
     getIndex: (req, res, next) => {
@@ -14,7 +13,7 @@ const basketballController = {
       return Promise.all([User.findByPk(user_id, { include: [Record, { model: User, as: 'Followers' }], nest: true,  }),User.findAll({ include: [Record, { model: User, as: 'Followers' }, { model: User, as: 'Followings' }],  nest: true})])
         .then(( [user, users]) => {
           if (!users) throw new Error("Users didn't exist! ")
-          all_user = users.map(user => ({
+         const all_user = users.map(user => ({
             ...user.toJSON(),
             followerCount: user.Followers.length,
             isFollowed: req.user.Followings.some(f => f.id === user.id),
@@ -112,39 +111,43 @@ const basketballController = {
         })
         .catch(err => next(err))
     },
-    getRank: (req, res) => {
+    getRank: (req, res, next) => {
       const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
       const teams = ['臺北富邦勇士','桃園領航猿','新竹街口攻城獅','福爾摩沙台新夢想家','高雄鋼鐵人','新北國王']
       const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
       const team = teams.find(team => team === req.query.team ) || ''
       return PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}}, order: [[sort, 'DESC']]})
         .then(plg => {
-          Plg = plg.map(plgs => ({
+          if (!plg) throw new Error("PLG didn't exist !")
+          plg = plg.map(plgs => ({
             ...plgs,
             index: plg.indexOf(plgs) + 1
           }))
-          res.render('rank', { plg: Plg, team, sort })
+          res.render('rank', { plg, team, sort })
         }  
         )
+        .catch(err => next(err))
     },
     getUserRank: (req, res, next) => {
       const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
       const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
       return User.findAll({raw: true, nest: true, order: [[sort, 'DESC']]})
         .then(users => {
+          if (!users) throw new Error("Users didn't exist !")
           users = users.map(user => ({
             ...user,
             index: users.indexOf(user) + 1
           }))
           res.render('user-rank', {users, sort})
         })
+        .catch(err => next(err))
     },
     getPlayer: (req, res, next) => { 
       const player = req.query.player?.trim().toLowerCase() || ""
       return User.findAll({ include: [{ model: User, as: 'Followers' }, Record],nest:true})
         .then((users) => {
           if (!users) throw new Error("Users didn't exist! ")
-          all_user = users.map(user => ({
+          let all_user = users.map(user => ({
             ...user.toJSON(),
             followerCount: user.Followers.length,
             isFollowed: req.user.Followings.some(f => f.id === user.id),
@@ -152,7 +155,7 @@ const basketballController = {
             comprehensive: user.toJSON().Records.pop()?.efg+user.toJSON().Records.pop()?.ts - user.toJSON().Records.pop()?.to_v || 0
           })) 
           if (!player) {
-            all_user = all_user.filter(user => user.comprehensive >= 85)
+             all_user = all_user.filter(user => user.comprehensive >= 85)
           }
           all_user = all_user.sort((a,b) => b.comprehensive - a.comprehensive)
           all_user = all_user.filter(user => user.name.toLowerCase().includes(player))

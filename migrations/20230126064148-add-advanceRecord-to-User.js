@@ -16,7 +16,7 @@ module.exports = {
     })
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface) => {
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([queryInterface.removeColumn('Users', 'PTS',  {transaction: t}),
       queryInterface.removeColumn('Users', 'FGA',  {transaction: t}),

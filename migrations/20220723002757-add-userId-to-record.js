@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.addColumn('Records','UserId',{type: Sequelize.INTEGER, allowNull: false, references: {model: 'Users', key: 'id'}})
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface) => {
     return queryInterface.removeColumn('Records', 'UserId')
   }
 };

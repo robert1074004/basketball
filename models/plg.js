@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     TO_V: DataTypes.INTEGER,
     game:DataTypes.INTEGER
   }, {});
-  PLG.associate = function(models) {
+  PLG.associate = function() {
     // associations can be defined here
   };
   return PLG;
