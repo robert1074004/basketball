@@ -62,6 +62,7 @@ const userController = {
         return user.update({name, position, image: filepath || user.toJSON().image})
       })
       .then(() => {
+        req.flash('success_messages', "使用者資訊編輯成功!")
         res.redirect('/basketball/:id')
       })
       .catch(err => next(err))

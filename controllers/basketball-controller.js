@@ -75,11 +75,14 @@ const basketballController = {
       const to_v = advanceData.getTov(TOV,FTA,FGA)
       if (efg > 100 || ts > 100 || to_v > 100) throw new Error('Some fields were wrong !')
       Record.create({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v,UserId})
-        .then(() => res.redirect('/basketball/record'))
+        .then(() => {
+            req.flash("success_messages", "成功新增數據")
+            res.redirect('/basketball/:id')
+          })
         .catch(err => next(err))
-    },
+        },
     putRecord: (req, res, next) => {
-      const {PTS, FGA, FTA, FGM, THREE_PM, TOV, date} = req.body
+      const { PTS, FGA, FTA, FGM, THREE_PM, TOV, date } = req.body
       const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
       const ts = advanceData.getTs(PTS,FTA,FGA)
       const to_v = advanceData.getTov(TOV,FTA,FGA)
@@ -89,7 +92,10 @@ const basketballController = {
           if (!record) throw new Error("Record didn't exist!")
           return record.update({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v})
         })
-        .then(() => res.redirect('/basketball/record'))
+        .then(() => {
+          req.flash("success_messages", "成功修改數據")
+          res.redirect('/basketball/:id')
+        })
         .catch(err => next(err))
     },
     deleteRecord: (req, res, next) => {
@@ -98,7 +104,10 @@ const basketballController = {
           if (!record) throw new Error("Record didn't exist!")
           return record.destroy()
         })
-        .then(() => res.redirect('/basketball/record'))
+        .then(() => {
+          req.flash("success_messages", "成功刪除數據")
+          res.redirect('/basketball/:id')
+        })
         .catch(err => next(err))
     },
     getRecord: (req, res, next) => {
