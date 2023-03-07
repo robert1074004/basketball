@@ -2,60 +2,59 @@ const { Record } = require('../models')
 const { PLG, User } = require('../models')
 const advanceData = require('../helpers/record-helpers')
 const basketballController = {
-    getIndex: (req, res, next) => {
+    getIndex: async (req, res, next) => {
       const user_id = Number(req.params.id) || req.user.id
-      let PTS = 0 
-      let FGA = 0
-      let FTA = 0
-      let FGM = 0
-      let THREE_PM = 0
-      let TOV = 0
-      return Promise.all([User.findByPk(user_id, { include: [Record, { model: User, as: 'Followers' }], nest: true,  }),User.findAll({ include: [Record, { model: User, as: 'Followers' }, { model: User, as: 'Followings' }],  nest: true})])
-        .then(( [user, users]) => {
-          if (!users) throw new Error("Users didn't exist! ")
-         const all_user = users.map(user => ({
-            ...user.toJSON(),
-            followerCount: user.Followers.length,
-            isFollowed: req.user.Followings.some(f => f.id === user.id),
-            isFans: req.user.Followers.some(f => f.id === user.id)
-          }))
-          const followings = all_user.filter(user => user.isFollowed).sort((a,b) => b.followerCount - a.followerCount)
-          const fans = all_user.filter(user => user.isFans).sort((a,b) => b.followerCount - a.followerCount)
-          const follow = followings[0]
-          const fan = fans[0]
-          if (!user) throw new Error("This user didn't exist!")
-          const other_user = {...user.toJSON(),
+      let pts = 0 
+      let fga = 0
+      let fta = 0
+      let fgm = 0
+      let three_pm = 0
+      let tov = 0
+      try{
+        const user = await User.findByPk(user_id, { include: [Record, { model: User, as: 'Followers' }], nest: true })
+        if (!user) throw new Error("User didn't exist! ")
+        const users = await User.findAll({ include: [Record, { model: User, as: 'Followers' }, { model: User, as: 'Followings' }],  nest: true })
+        const all_user = users.map(user => ({
+                ...user.toJSON(),
+                followerCount: user.Followers.length,
+                isFollowed: req.user.Followings.some(f => f.id === user.id),
+                isFans: req.user.Followers.some(f => f.id === user.id)
+              }))
+        const followings = all_user.filter(user => user.isFollowed).sort((a,b) => b.followerCount - a.followerCount)
+        const fans = all_user.filter(user => user.isFans).sort((a,b) => b.followerCount - a.followerCount)
+        const other_user = {...user.toJSON(),
             followerCount: user.toJSON().Followers.length,
             isFollowed: req.user.Followings.some(f => f.id === user.toJSON().id)
-          }
-          user.Records.forEach(record => {
-            PTS += (record.PTS / user.Records.length)
-            FGA += (record.FGA / user.Records.length)
-            FTA += (record.FTA / user.Records.length)
-            FGM += (record.FGM / user.Records.length)
-            THREE_PM += (record.THREE_PM / user.Records.length)
-            TOV += (record.TOV / user.Records.length)
-          })
-          let pts = PTS.toFixed()
-          let fga = FGA.toFixed()
-          let fta = FTA.toFixed()
-          let fgm = FGM.toFixed()
-          let three_pm = THREE_PM.toFixed()
-          let tov = TOV.toFixed()
-          PTS = PTS.toFixed(2)
-          FGA = FGA.toFixed(2)
-          FTA = FTA.toFixed(2)
-          FGM = FGM.toFixed(2)
-          THREE_PM = THREE_PM.toFixed(2)
-          TOV = TOV.toFixed(2)
-          let game = user.Records.length
-          const EFG = advanceData.getEfg(fgm,three_pm,fga)
-          const TS = advanceData.getTs(pts,fta,fga)
-          const TO_V = advanceData.getTov(tov,fta,fga)
-          user.update({PTS,FGA,FTA,FGM,THREE_PM,TOV,EFG,TS,TO_V,game})
-          res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans,follow,fan}) 
+        }
+        other_user.Records.forEach(record => {
+            pts += (record.PTS / user.Records.length)
+            fga += (record.FGA / user.Records.length)
+            fta += (record.FTA / user.Records.length)
+            fgm += (record.FGM / user.Records.length)
+            three_pm += (record.THREE_PM / user.Records.length)
+            tov += (record.TOV / user.Records.length)
         })
-        .catch(err => next(err))
+        let PTS = pts.toFixed(2)
+        let FGA = fga.toFixed(2)
+        let FTA = fta.toFixed(2)
+        let FGM = fgm.toFixed(2)
+        let THREE_PM = three_pm.toFixed(2)
+        let TOV = tov.toFixed(2)
+        pts = pts.toFixed()
+        fga = fga.toFixed()
+        fta = fta.toFixed()
+        fgm = fgm.toFixed()
+        three_pm = three_pm.toFixed()
+        tov = tov.toFixed()
+        let game = other_user.Records.length
+        const EFG = advanceData.getEfg(fgm,three_pm,fga)
+        const TS = advanceData.getTs(pts,fta,fga)
+        const TO_V = advanceData.getTov(tov,fta,fga)
+        await user.update({PTS,FGA,FTA,FGM,THREE_PM,TOV,EFG,TS,TO_V,game})
+        res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans})
+      } catch (err) {
+         next(err)
+      }
     },
     getForm: (req, res) => {
       return res.render('create-form')
