@@ -20,8 +20,11 @@ const basketballController = {
                 isFollowed: req.user.Followings.some(f => f.id === user.id),
                 isFans: req.user.Followers.some(f => f.id === user.id)
               }))
+        
         const followings = all_user.filter(user => user.isFollowed).sort((a,b) => b.followerCount - a.followerCount)
         const fans = all_user.filter(user => user.isFans).sort((a,b) => b.followerCount - a.followerCount)
+        const follow = followings[0]
+        const fan = fans[0]
         const other_user = {...user.toJSON(),
             followerCount: user.toJSON().Followers.length,
             isFollowed: req.user.Followings.some(f => f.id === user.toJSON().id)
@@ -51,7 +54,7 @@ const basketballController = {
         const TS = advanceData.getTs(pts,fta,fga)
         const TO_V = advanceData.getTov(tov,fta,fga)
         await user.update({PTS,FGA,FTA,FGM,THREE_PM,TOV,EFG,TS,TO_V,game})
-        res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans})
+        res.render('index',{game,EFG,TS,TO_V,other_user,followings,fans,follow,fan})
       } catch (err) {
          next(err)
       }
