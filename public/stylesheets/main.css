@@ -70,7 +70,11 @@
     align-items: center;
   }
   #search_bar{
+    margin-left: 0;
+  }
+  #dropdown_search{
     display: flex;
+    flex-direction: column;
   }
   #record_table {
     overflow: auto;
@@ -127,6 +131,8 @@
   @media screen and (min-width:480px) {#follow_button{display: none}}
   @media screen and (min-width:480px) {#top_player{ width:850px; height: 520px; display:flex; flex-direction: row ; flex-wrap: wrap; overflow-y: auto; justify-content: center;}}
   @media screen and (min-width:480px) {#hint{ display:none;}}
+  @media screen and (min-width:480px) {#search_bar{margin-left: 16px;}}
+  @media screen and (min-width:480px) {#dropdown_search{display: flex; flex-direction: row;}}
   @media screen and (max-width:480px) {#p{margin-left:20px;}}
   @media screen and (max-width:480px) {#follow{display: none;}}
   @media screen and (max-width:480px) {#date{font-size: 14px;}}

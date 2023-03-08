@@ -1,6 +1,7 @@
 const { Record } = require('../models')
 const { PLG, User } = require('../models')
 const advanceData = require('../helpers/record-helpers')
+const { Op } = require('sequelize')
 const basketballController = {
     getIndex: async (req, res, next) => {
       const user_id = Number(req.params.id) || req.user.id
@@ -123,18 +124,19 @@ const basketballController = {
         .catch(err => next(err))
     },
     getRank: (req, res, next) => {
+      const player = req.query.player?.trim() || ""
       const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
       const teams = ['臺北富邦勇士','桃園領航猿','新竹街口攻城獅','福爾摩沙台新夢想家','高雄鋼鐵人','新北國王']
       const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
       const team = teams.find(team => team === req.query.team ) || ''
-      return PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}}, order: [[sort, 'DESC']]})
+      return PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}, name: {[ Op.substring ]: player}}, order: [[sort, 'DESC']]})
         .then(plg => {
           if (!plg) throw new Error("PLG didn't exist !")
           plg = plg.map(plgs => ({
             ...plgs,
             index: plg.indexOf(plgs) + 1
           }))
-          res.render('rank', { plg, team, sort })
+          res.render('rank', { plg, team, sort, player })
         }  
         )
         .catch(err => next(err))

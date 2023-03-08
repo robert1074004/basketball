@@ -1,48 +1,63 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" id="rank_panel">
         <h3 class="text-center my-2">PLG例行賽(2021 - 2022)</h3>
-         <p class="ms-2 my-3" >* 此排行榜只紀錄出賽至少20場的球員</p>
-        <div class="dropdown mb-4 " >
-             <a class="btn btn-primary  dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown"
+        <p class="ms-2 my-3">* 此排行榜只紀錄出賽至少20場的球員</p>
+        <div  id="dropdown_search">
+            <div class="dropdown mb-4 ">
+            <a class="btn btn-primary  dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 {{#ifCond team ""}}球隊分類{{else}}{{team}}{{/ifCond}}
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark" >
-                <li><a class="dropdown-item" href="?team=" >全部</a></li>
-                <li><a class="dropdown-item" href="?team=臺北富邦勇士">臺北富邦勇士</a></li>
-                <li><a class="dropdown-item" href="?team=桃園領航猿">桃園領航猿</a></li>
-                <li><a class="dropdown-item" href="?team=新竹街口攻城獅">新竹街口攻城獅</a></li>
-                <li><a class="dropdown-item" href="?team=福爾摩沙台新夢想家">福爾摩沙台新夢想家</a></li>
-                <li><a class="dropdown-item" href="?team=高雄鋼鐵人">高雄鋼鐵人</a></li>
-                <li><a class="dropdown-item" href="?team=新北國王">新北國王</a></li>
-            </ul> 
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="?team=">全部</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=臺北富邦勇士&player={{player}}">臺北富邦勇士</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=桃園領航猿&player={{player}}">桃園領航猿</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=新竹街口攻城獅&player={{player}}">新竹街口攻城獅</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=福爾摩沙台新夢想家&player={{player}}">福爾摩沙台新夢想家</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=高雄鋼鐵人&player={{player}}">高雄鋼鐵人</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=新北國王&player={{player}}">新北國王</a></li>
+            </ul>
 
             <a class="btn btn-primary  dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                 {{#ifCond sort "PTS"}}排序方式{{else}}{{sort}}{{/ifCond}}
+                {{#ifCond sort "PTS"}}排序方式{{else}}{{sort}}{{/ifCond}}
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark" >
-                <li><a class="dropdown-item" href="?sort=PTS&team={{team}}" >得分</a></li>
-                <li><a class="dropdown-item" href="?sort=FGM&team={{team}}">投籃命中</a></li>
-                <li><a class="dropdown-item" href="?sort=THREE_PM&team={{team}}">三分命中</a></li>
-                <li><a class="dropdown-item" href="?sort=FGA&team={{team}}">投籃出手</a></li>
-                <li><a class="dropdown-item" href="?sort=FTA&team={{team}}">罰球出手</a></li>
-                <li><a class="dropdown-item" href="?sort=TOV&team={{team}}">失誤</a></li>
-                <li><a class="dropdown-item" href="?sort=EFG&team={{team}}">有效命中率</a></li>
-                <li><a class="dropdown-item" href="?sort=TS&team={{team}}">真實命中率</a></li>
-                <li><a class="dropdown-item" href="?sort=TO_V&team={{team}}">失誤率</a></li>
-                <li><a class="dropdown-item" href="?sort=game&team={{team}}">出賽場數</a></li>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="?sort=PTS&team={{team}}&player={{player}}">得分</a></li>
+                <li><a class="dropdown-item" href="?sort=FGM&team={{team}}&player={{player}}">投籃命中</a></li>
+                <li><a class="dropdown-item" href="?sort=THREE_PM&team={{team}}&player={{player}}">三分命中</a></li>
+                <li><a class="dropdown-item" href="?sort=FGA&team={{team}}&player={{player}}">投籃出手</a></li>
+                <li><a class="dropdown-item" href="?sort=FTA&team={{team}}&player={{player}}">罰球出手</a></li>
+                <li><a class="dropdown-item" href="?sort=TOV&team={{team}}&player={{player}}">失誤</a></li>
+                <li><a class="dropdown-item" href="?sort=EFG&team={{team}}&player={{player}}">有效命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TS&team={{team}}&player={{player}}">真實命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TO_V&team={{team}}&player={{player}}">失誤率</a></li>
+                <li><a class="dropdown-item" href="?sort=game&team={{team}}&player={{player}}">出賽場數</a></li>
             </ul>
-
-            
         </div>
-       
+
+        <form class="d-flex" action="/rank" id="search_bar" >
+                <div class="col-auto me-3">
+                    <label for="player" class="visually-hidden"></label>
+                    <input type="text" class="form-control" id="player" placeholder="球員名稱" name="player"
+                        value="{{player}}" >
+                </div>
+                <div class="col-auto ">
+                    <button type="submit" class="btn btn-primary mb-3">搜尋球員</button>
+                </div>
+            </form>
+
+        </div>
+        
+        
+
         <div class=" border border-primary border-3" id="rank_table">
             <table class="table table-hover mb-0">
                 <thead class="table-primary">
                     <tr>
                         <th scope="col">排名</th>
-                        <th scope="col" style="position: sticky;left:0;z-index: 3; background-color: rgb(255, 221, 210);">球員</th>
+                        <th scope="col"
+                            style="position: sticky;left:0;z-index: 3; background-color: rgb(255, 221, 210);">球員</th>
                         <th scope="col" style="width: 170px;">隊伍</th>
                         <th scope="col">得分</th>
                         <th scope="col">投籃命中</th>
