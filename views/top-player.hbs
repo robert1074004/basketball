@@ -1,15 +1,5 @@
 <div class="container-fluid mt-3 d-flex flex-column align-items-center">
-    <form class="row g-3" action="/basketball/top-player" id="search_bar">
-        <div class="col-auto">
-            <label for="player" class="visually-hidden"></label>
-            <input type="text" class="form-control" id="player" placeholder="球員名稱" name="player" value="{{player}}" style="width: 150px;">
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">搜尋球員</button>
-        </div>
-    </form>
-    <div style="outline: 3px solid tomato;" >
-       
+    <div class="mt-5" style="outline: 3px solid tomato;" >
         <div class=" tabindex= 0 p-2 " data-bs-spy="scroll"  id="top_player">
             {{#if users}}
             {{#each users}}

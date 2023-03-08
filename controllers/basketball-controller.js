@@ -156,7 +156,6 @@ const basketballController = {
         .catch(err => next(err))
     },
     getPlayer: (req, res, next) => { 
-      const player = req.query.player?.trim().toLowerCase() || ""
       return User.findAll({ include: [{ model: User, as: 'Followers' }, Record],nest:true})
         .then((users) => {
           if (!users) throw new Error("Users didn't exist! ")
@@ -167,12 +166,9 @@ const basketballController = {
             latest: user.toJSON().Records.pop() || {},
             comprehensive: user.toJSON().Records.pop()?.efg+user.toJSON().Records.pop()?.ts - user.toJSON().Records.pop()?.to_v || 0
           })) 
-          if (!player) {
-             all_user = all_user.filter(user => user.comprehensive >= 85)
-          }
+          all_user = all_user.filter(user => user.comprehensive >= 85)
           all_user = all_user.sort((a,b) => b.comprehensive - a.comprehensive)
-          all_user = all_user.filter(user => user.name.toLowerCase().includes(player))
-          res.render('top-player', { users: all_user, player})
+          res.render('top-player', { users: all_user })
         })
         .catch(err => next(err))  
     }
