@@ -24,7 +24,7 @@ app.use('/upload',express.static(path.join(__dirname, 'upload')))
 app.use(express.urlencoded({ extended: true }))
 
 
-app.use(session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false}))
+app.use(session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false, cookie:{_expires : 86400000}}))
 
 app.use(passport.initialize())
 app.use(passport.session())
