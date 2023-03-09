@@ -1,24 +1,38 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" id="rank_panel">
         <h3 class="text-center my-4">球員排行榜</h3>
-        <div class="dropdown mb-4">
+        <div class="d-flex">
+            <div class="dropdown mb-4">
             <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                {{#ifCond sort "PTS"}}排序方式{{else}}{{sort}}{{/ifCond}}
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" >
-                <li><a class="dropdown-item" href="?sort=PTS" >得分</a></li>
-                <li><a class="dropdown-item" href="?sort=FGM">投籃命中</a></li>
-                <li><a class="dropdown-item" href="?sort=THREE_PM">三分命中</a></li>
-                <li><a class="dropdown-item" href="?sort=FGA">投籃出手</a></li>
-                <li><a class="dropdown-item" href="?sort=FTA">罰球出手</a></li>
-                <li><a class="dropdown-item" href="?sort=TOV">失誤</a></li>
-                <li><a class="dropdown-item" href="?sort=EFG">有效命中率</a></li>
-                <li><a class="dropdown-item" href="?sort=TS">真實命中率</a></li>
-                <li><a class="dropdown-item" href="?sort=TO_V">失誤率</a></li>
-                <li><a class="dropdown-item" href="?sort=game">出賽場數</a></li>
+                <li><a class="dropdown-item" href="?sort=PTS&player={{player}}" >得分</a></li>
+                <li><a class="dropdown-item" href="?sort=FGM&player={{player}}">投籃命中</a></li>
+                <li><a class="dropdown-item" href="?sort=THREE_PM&player={{player}}">三分命中</a></li>
+                <li><a class="dropdown-item" href="?sort=FGA&player={{player}}">投籃出手</a></li>
+                <li><a class="dropdown-item" href="?sort=FTA&player={{player}}">罰球出手</a></li>
+                <li><a class="dropdown-item" href="?sort=TOV&player={{player}}">失誤</a></li>
+                <li><a class="dropdown-item" href="?sort=EFG&player={{player}}">有效命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TS&player={{player}}">真實命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TO_V&player={{player}}">失誤率</a></li>
+                <li><a class="dropdown-item" href="?sort=game&player={{player}}">出賽場數</a></li>
             </ul>
         </div>
+
+        <form class="d-flex ms-3" action="/basketball/user-rank" >
+                <div class="col-6 me-3">
+                    <label for="player" class="visually-hidden"></label>
+                    <input type="text" class="form-control" id="player" placeholder="球員名稱" name="player"
+                        value="{{player}}" >
+                </div>
+                <div class="col-auto ">
+                    <button type="submit" class="btn btn-primary mb-3">搜尋球員</button>
+                </div>
+            </form>
+        </div>
+        
         <div class=" border border-primary border-3" id="rank_table">
             <table class="table table-hover mb-0 ">
                 <thead class="table-primary">

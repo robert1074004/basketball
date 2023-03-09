@@ -142,16 +142,17 @@ const basketballController = {
         .catch(err => next(err))
     },
     getUserRank: (req, res, next) => {
+      const player = req.query.player?.trim() || ""
       const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
       const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
-      return User.findAll({raw: true, nest: true, order: [[sort, 'DESC']]})
+      return User.findAll({raw: true, nest: true, where: { name: {[ Op.substring ]: player} }, order: [[sort, 'DESC']]})
         .then(users => {
           if (!users) throw new Error("Users didn't exist !")
           users = users.map(user => ({
             ...user,
             index: users.indexOf(user) + 1
           }))
-          res.render('user-rank', {users, sort})
+          res.render('user-rank', {users, sort, player})
         })
         .catch(err => next(err))
     },
