@@ -72,11 +72,7 @@ const basketballController = {
     },
     postRecord: (req, res, next) => {
       const UserId = req.user.id
-      const {PTS, FGA, FTA, FGM, THREE_PM, TOV, date} = req.body
-      const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
-      const ts = advanceData.getTs(PTS,FTA,FGA)
-      const to_v = advanceData.getTov(TOV,FTA,FGA)
-      if (efg > 100 || ts > 100 || to_v > 100) throw new Error('Some fields were wrong !')
+      const {PTS, FGA, FTA, FGM, THREE_PM, TOV, date, efg ,ts, to_v} = req.body
       Record.create({PTS,FGA,FTA,FGM,THREE_PM,TOV,date,efg,ts,to_v,UserId})
         .then(() => {
             req.flash("success_messages", "成功新增數據")
@@ -85,11 +81,7 @@ const basketballController = {
         .catch(err => next(err))
         },
     putRecord: (req, res, next) => {
-      const { PTS, FGA, FTA, FGM, THREE_PM, TOV, date } = req.body
-      const efg = advanceData.getEfg(FGM,THREE_PM,FGA)
-      const ts = advanceData.getTs(PTS,FTA,FGA)
-      const to_v = advanceData.getTov(TOV,FTA,FGA)
-      if (efg > 100 || ts > 100 || to_v > 100) throw new Error('Some fields were wrong !')
+      const { PTS, FGA, FTA, FGM, THREE_PM, TOV, date, efg ,ts ,to_v } = req.body
       return Record.findByPk(req.params.id)
         .then(record => {
           if (!record) throw new Error("Record didn't exist!")
