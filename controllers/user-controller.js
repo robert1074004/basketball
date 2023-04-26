@@ -7,9 +7,7 @@ const userController = {
     res.render('register')
   },
   register: (req, res, next) => {
-    const { name, email, password, confirmPassword, position } = req.body
-    if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim() || !position.trim()) throw new Error('Some fields must be required')
-    if (password !== confirmPassword) throw new Error('Password do not match!')
+    const { name, email, password, position } = req.body
     User.findOne({
         where: {
           email
@@ -18,7 +16,7 @@ const userController = {
       .then(user => {
         if (user) throw new Error('Email already exists!')
         const { file } = req
-        return Promise.all([bcrypt.hash(req.body.password, 10), imgurFileHandler(file)])
+        return Promise.all([bcrypt.hash(password, 10), imgurFileHandler(file)])
       })
       .then(([hash, filepath]) => {
         User.create({
