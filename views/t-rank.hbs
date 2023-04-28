@@ -1,0 +1,97 @@
+<div class="container-fluid mt-3">
+    <div class="mx-auto" id="rank_panel">
+        <h3 class="text-center my-2">T1例行賽(2022 - 2023)</h3>
+        <p class="ms-2 my-3">* 此排行榜只紀錄出賽至少20場的球員</p>
+        <div  id="dropdown_search">
+            <div class="dropdown mb-4 ">
+            <a class="btn btn-primary  dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{#ifCond team ""}}球隊分類{{else}}{{team}}{{/ifCond}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="?team=">全部</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=台灣啤酒英熊&player={{player}}">台灣啤酒英熊</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=新北中信特攻&player={{player}}">新北中信特攻</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=桃園永豐雲豹&player={{player}}">桃園永豐雲豹</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=臺中太陽&player={{player}}">臺中太陽</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=臺南台鋼獵鷹&player={{player}}">臺南台鋼獵鷹</a></li>
+                <li><a class="dropdown-item" href="?sort={{sort}}&team=高雄全家海神&player={{player}}">高雄全家海神</a></li>
+            </ul>
+
+            <a class="btn btn-primary  dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{#ifCond sort "PTS"}}排序方式{{else}}{{sort}}{{/ifCond}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="?sort=PTS&team={{team}}&player={{player}}">得分</a></li>
+                <li><a class="dropdown-item" href="?sort=FGM&team={{team}}&player={{player}}">投籃命中</a></li>
+                <li><a class="dropdown-item" href="?sort=THREE_PM&team={{team}}&player={{player}}">三分命中</a></li>
+                <li><a class="dropdown-item" href="?sort=FGA&team={{team}}&player={{player}}">投籃出手</a></li>
+                <li><a class="dropdown-item" href="?sort=FTA&team={{team}}&player={{player}}">罰球出手</a></li>
+                <li><a class="dropdown-item" href="?sort=TOV&team={{team}}&player={{player}}">失誤</a></li>
+                <li><a class="dropdown-item" href="?sort=EFG&team={{team}}&player={{player}}">有效命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TS&team={{team}}&player={{player}}">真實命中率</a></li>
+                <li><a class="dropdown-item" href="?sort=TO_V&team={{team}}&player={{player}}">失誤率</a></li>
+                <li><a class="dropdown-item" href="?sort=game&team={{team}}&player={{player}}">出賽場數</a></li>
+            </ul>
+        </div>
+
+        <form class="d-flex" action="/TRank" id="search_bar" >
+                <div class="col-6 me-3">
+                    <label for="player" class="visually-hidden"></label>
+                    <input type="text" class="form-control" id="player" placeholder="球員名稱" name="player"
+                        value="{{player}}" >
+                </div>
+                <div class="col-auto ">
+                    <button type="submit" class="btn btn-primary mb-3">搜尋球員</button>
+                </div>
+            </form>
+
+        </div>
+        
+        
+
+        <div class=" border border-primary border-3" id="rank_table">
+            <table class="table table-hover mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">排名</th>
+                        <th scope="col"
+                            style="position: sticky;left:0;z-index: 3; background-color: rgb(255, 221, 210);">球員</th>
+                        <th scope="col" style="width: 170px;">隊伍</th>
+                        <th scope="col">得分</th>
+                        <th scope="col">投籃命中</th>
+                        <th scope="col">三分命中</th>
+                        <th scope="col">投籃出手</th>
+                        <th scope="col">罰球出手</th>
+                        <th scope="col">失誤</th>
+                        <th scope="col">有效命中率</th>
+                        <th scope="col">真實命中率</th>
+                        <th scope="col">失誤率</th>
+                        <th scope="col">出賽場數</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each t1}}
+                    <tr>
+                        <td scope="row" style="font-size:20px;">{{this.index}}</td>
+                        <td style=" position:sticky; left:0; z-index:1; background-color: white;">{{this.name}}</td>
+                        <td>{{this.team}}</td>
+                        <td>{{this.PTS}}</td>
+                        <td>{{this.FGM}}</td>
+                        <td>{{this.THREE_PM}}</td>
+                        <td>{{this.FGA}}</td>
+                        <td>{{this.FTA}}</td>
+                        <td>{{this.TOV}}</td>
+                        <td>{{this.EFG}}%</td>
+                        <td>{{this.TS}}%</td>
+                        <td>{{this.TO_V}}%</td>
+                        <td>{{this.game}}</td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
