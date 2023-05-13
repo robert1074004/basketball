@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const app = express()
 const port = process.env.PORT || 3000
-const SESSION_SECRET = 'secret'
+const SESSION_SECRET =  process.env.SECRET
 
 app.use(methodOverride('_method'))
 app.engine('hbs', exphbs.engine({defaultLayout:'main',extname:'.hbs',helpers: handlebarHelpres}))
