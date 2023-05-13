@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     TS: DataTypes.INTEGER,
     TO_V: DataTypes.INTEGER,
     game:DataTypes.INTEGER,
-    totalMinusPlus: DataTypes.INTEGER
+    total_minus_plus: DataTypes.INTEGER
   }, {});
   PLG.associate = function() {
     // associations can be defined here
