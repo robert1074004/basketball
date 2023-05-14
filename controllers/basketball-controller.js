@@ -117,7 +117,7 @@ const basketballController = {
     },
     getRank: (req, res, next) => {
       const player = req.query.player?.trim() || ""
-      const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V']
+      const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V','total_minus_plus']
       const teams = ['臺北富邦勇士','桃園領航猿','新竹街口攻城獅','福爾摩沙台新夢想家','高雄鋼鐵人','新北國王']
       const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
       const team = teams.find(team => team === req.query.team ) || ''

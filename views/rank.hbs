@@ -1,7 +1,7 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" id="rank_panel">
-        <h3 class="text-center my-2">PLG例行賽(2021 - 2022)</h3>
-        <p class="ms-2 my-3">* 此排行榜只紀錄出賽至少20場的球員</p>
+        <h3 class="text-center my-2">PLG例行賽(2022 - 2023)</h3>
+        <p class="ms-2 my-3">* 此排行榜只紀錄出賽至少30場的球員</p>
         <div  id="dropdown_search">
             <div class="dropdown mb-4 ">
             <a class="btn btn-primary  dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown"
@@ -32,6 +32,7 @@
                 <li><a class="dropdown-item" href="?sort=EFG&team={{team}}&player={{player}}">有效命中率</a></li>
                 <li><a class="dropdown-item" href="?sort=TS&team={{team}}&player={{player}}">真實命中率</a></li>
                 <li><a class="dropdown-item" href="?sort=TO_V&team={{team}}&player={{player}}">失誤率</a></li>
+                <li><a class="dropdown-item" href="?sort=total_minus_plus&team={{team}}&player={{player}}">總正負值</a></li>
                 <li><a class="dropdown-item" href="?sort=game&team={{team}}&player={{player}}">出賽場數</a></li>
             </ul>
         </div>
@@ -68,6 +69,7 @@
                         <th scope="col">有效命中率</th>
                         <th scope="col">真實命中率</th>
                         <th scope="col">失誤率</th>
+                        <th scope="col">總正負值</th>
                         <th scope="col">出賽場數</th>
                     </tr>
                 </thead>
@@ -86,6 +88,7 @@
                         <td>{{this.EFG}}%</td>
                         <td>{{this.TS}}%</td>
                         <td>{{this.TO_V}}%</td>
+                        <td>{{this.total_minus_plus}}</td>
                         <td>{{this.game}}</td>
                     </tr>
                     {{/each}}
