@@ -15,6 +15,11 @@
     "operatorsAliases": false
   },
   "production": {
-    "use_env_variable": "CLEARDB_DATABASE_URL"
+    "use_env_variable": "CLEARDB_DATABASE_URL",
+    "username": "root",
+    "password": "abc83213",
+    "database": "basketball",
+    "host": "35.221.255.32",
+    "dialect": "mysql"
   }
 }
