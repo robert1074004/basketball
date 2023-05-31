@@ -5,3 +5,6 @@ env_variables:
   IMGUR_CLIENT_ID : cfee56143e2f7c9
   PORT : 8080
   SECRET : 'secret'
+  GCS_BUCKET: 'robert0615bucket'
+  GCLOUD_PROJECT: 'x-catwalk-386401' 
+  GCS_KEYFILE: './key.json'
