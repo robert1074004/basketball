@@ -15,6 +15,7 @@
     "operatorsAliases": false
   },
   "production": {
+    "use_env_variable": "CLEARDB_DATABASE_URL",
     "username": "root",
     "password": "abc83213",
     "database": "basketball",
