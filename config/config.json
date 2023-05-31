@@ -16,9 +16,9 @@
   },
   "production": {
     "username": "root",
-    "password": "abc83213",
+    "password": "password",
     "database": "basketball",
-    "host": "35.221.255.32",
+    "host": "host",
     "dialect": "mysql"
   }
 }
