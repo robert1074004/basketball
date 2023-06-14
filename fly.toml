@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for basketball0615 on 2023-06-14T13:03:51+08:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "basketball0615"
+primary_region = "nrt"
+
+[env]
+  PORT = 3000
+  SESSION_SECRET = 'secret'
+  NODE_ENV = "production"
+  IMGUR_CLIENT_ID = 'cfee56143e2f7c9'
+
+[deploy]
+  release_command = "npx sequelize db:migrate"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0

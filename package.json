@@ -7,7 +7,6 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node models/seeds/recordSeeder.js",
     "eslintInit": "eslint --init",
     "lint": "eslint --fix ."
   },
@@ -39,6 +38,7 @@
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.2.15",
     "eslint": "^8.33.0",
     "eslint-plugin-react": "^7.32.2",
     "pre-commit": "^1.2.2",

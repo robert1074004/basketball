@@ -18,7 +18,7 @@
     "username": "root",
     "password": "password",
     "database": "basketball",
-    "host": "host",
+    "host": "polished-frost-5278.internal",
     "dialect": "mysql"
   }
 }
