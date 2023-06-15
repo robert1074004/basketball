@@ -1,4 +1,3 @@
 const multer = require('multer')
-const multerGoogleStorage = require('multer-cloud-storage')
-const upload = multer({ storage: multerGoogleStorage.storageEngine()})
+const upload = multer({ dest: 'temp/ ' })
 module.exports = upload
