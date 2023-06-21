@@ -15,10 +15,6 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": "password",
-    "database": "basketball",
-    "host": "black-hill-3348.internal",
-    "dialect": "mysql"
+    "use_env_variable" : "CLEARDB_DATABASE_URL"
   }
 }
