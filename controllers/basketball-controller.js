@@ -2,7 +2,7 @@ const { Record } = require('../models')
 const { PLG, User, T1 } = require('../models')
 const advanceData = require('../helpers/record-helpers')
 const { Op } = require('sequelize')
-const redis = require("redis")
+// const redis = require("redis")
 const basketballController = {
     getIndex: async (req, res, next) => {
       const user_id = Number(req.params.id) || req.user.id
@@ -118,32 +118,41 @@ const basketballController = {
     },
     getRank: async (req, res, next) => {
       try {
-        const client = redis.createClient({url: process.env.REDIS_TLS_URL, socket: {
-          tls: true,
-          rejectUnauthorized: false,
-        }})
-        await client.connect()
+        // Heroku Redis
+        // const client = redis.createClient({url: process.env.REDIS_TLS_URL, socket: {
+        //   tls: true,
+        //   rejectUnauthorized: false,
+        // }})
+        // await client.connect()
         const player = req.query.player?.trim() || ""
         const sorts = ['PTS','FGA','FTA','FGM','THREE_PM','TOV','game','EFG','TS','TO_V','total_minus_plus']
         const teams = ['臺北富邦勇士','桃園璞園領航猿','新竹街口攻城獅','福爾摩沙台新夢想家','高雄17直播鋼鐵人','新北國王']
         const sort = sorts.find(sort => sort === req.query.sort) || 'PTS'
         const team = teams.find(team => team === req.query.team ) || ''
-        const route = player + '/' + team + '/' + sort
-        const data = await client.get(route)
-        if (data) {
-          const plg = JSON.parse(data)
-          res.render('rank', { plg, team, sort, player })
-        } else {
-          let plg = await PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}, name: {[ Op.substring ]: player}}, order: [[sort, 'DESC']]})
-          if (!plg) throw new Error("PLG didn't exist !")
-          plg = plg.map(plgs => ({
-                  ...plgs,
-                  index: plg.indexOf(plgs) + 1
-                }))
-          await client.set(route, JSON.stringify(plg))
-          await client.expire(route,86400)
-          res.render('rank', { plg, team, sort, player })
-        }
+        let plg = await PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}, name: {[ Op.substring ]: player}}, order: [[sort, 'DESC']]})
+        if (!plg) throw new Error("PLG didn't exist !")
+        plg = plg.map(plgs => ({
+                ...plgs,
+                index: plg.indexOf(plgs) + 1
+              }))
+        res.render('rank', { plg, team, sort, player })
+        // Heroku Redis
+        // const route = player + '/' + team + '/' + sort
+        // const data = await client.get(route)
+        // if (data) {
+        //   const plg = JSON.parse(data)
+        //   res.render('rank', { plg, team, sort, player })
+        // } else {
+        //   let plg = await PLG.findAll({  raw:true,nest:true,  where: {...team ? {team} : {}, name: {[ Op.substring ]: player}}, order: [[sort, 'DESC']]})
+        //   if (!plg) throw new Error("PLG didn't exist !")
+        //   plg = plg.map(plgs => ({
+        //           ...plgs,
+        //           index: plg.indexOf(plgs) + 1
+        //         }))
+        //   await client.set(route, JSON.stringify(plg))
+        //   await client.expire(route,86400)
+        //   res.render('rank', { plg, team, sort, player })
+        // }
       } catch (err) 
         { next(err) }
     },
