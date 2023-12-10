@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "dbPassword",
     "database": "basketball",
     "host": "127.0.0.1",
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
@@ -15,6 +16,10 @@
     "operatorsAliases": false
   },
   "production": {
-    "use_env_variable" : "CLEARDB_DATABASE_URL"
+    "username": "robert",
+    "password": "dbPassword",
+    "database": "basketball",
+    "host": "basketball-sql-floral-shadow-5627.internal", 
+    "dialect": "mysql"
   }
 }
