@@ -197,9 +197,9 @@ const basketballController = {
             ...user.toJSON(),
             followerCount: user.Followers.length,
             isFollowed: req.user.Followings.some(f => f.id === user.id),
-            //本地端用pop才是最新的record，fly.io用shift才是最新的record(原因還不清楚)
-            latest: user.toJSON().Records.shift() || {},
-            comprehensive: user.toJSON().Records.shift()?.efg+user.toJSON().Records.shift()?.ts - user.toJSON().Records.shift()?.to_v || 0
+            //record少於5個shift才是最新的record，record多於5個用pop才是最新的record(原因還不清楚)
+            latest: user.toJSON().Records.pop() || {},
+            comprehensive: user.toJSON().Records.pop()?.efg+user.toJSON().Records.pop()?.ts - user.toJSON().Records.pop()?.to_v || 0
           })) 
           all_user = all_user.filter(user => user.comprehensive >= 85)
           all_user = all_user.sort((a,b) => b.comprehensive - a.comprehensive)
