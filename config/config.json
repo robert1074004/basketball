@@ -16,10 +16,10 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "robert",
+    "username": "root",
     "password": "dbPassword",
     "database": "basketball",
-    "host": "basketball-sql-floral-shadow-5627.internal", 
+    "host": "robert-database.internal", 
     "dialect": "mysql"
   }
 }
