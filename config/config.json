@@ -19,7 +19,7 @@
     "username": "root",
     "password": "dbPassword",
     "database": "basketball",
-    "host": "robert-database.internal", 
+    "host": "basketball-db.internal", 
     "dialect": "mysql"
   }
 }
